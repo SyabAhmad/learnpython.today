@@ -12,11 +12,11 @@ export default function TagsPage() {
   const tagCounts = Object.entries(allTags).reduce(
     (acc, [_, tag]) => {
       const gameCount = games.filter((game) =>
-        game.tags.some((t: any) => t.text === tag.text || t.href === tag.href)
+        game.tags.some((t: any) => t.text === tag.text || t.href === tag.href),
       ).length;
 
       const blogCount = blogs.filter((blog) =>
-        blog.tags.some((t: any) => t.text === tag.text || t.href === tag.href)
+        blog.tags.some((t: any) => t.text === tag.text || t.href === tag.href),
       ).length;
 
       const total = gameCount + blogCount;
@@ -25,7 +25,12 @@ export default function TagsPage() {
       }
       return acc;
     },
-    [] as Array<{ tag: any; gameCount: number; blogCount: number; total: number }>
+    [] as Array<{
+      tag: any;
+      gameCount: number;
+      blogCount: number;
+      total: number;
+    }>,
   );
 
   // Sort by popularity (most items first)
