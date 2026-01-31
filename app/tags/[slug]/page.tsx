@@ -16,7 +16,9 @@ interface TagPageParams {
 export default function TagPage({ params }: TagPageParams) {
   // Find the tag by slug
   const tagEntry = Object.entries(allTags).find(
-    ([_, tag]) => tag.href === `/tags/${params.slug}` || tag.href === `/tags/${params.slug}/`
+    ([_, tag]) =>
+      tag.href === `/tags/${params.slug}` ||
+      tag.href === `/tags/${params.slug}/`,
   );
 
   if (!tagEntry) {
@@ -26,7 +28,10 @@ export default function TagPage({ params }: TagPageParams) {
         <p className="text-muted-foreground mt-2">
           The tag you're looking for doesn't exist.
         </p>
-        <Link href="/games" className="text-primary hover:underline mt-4 inline-block">
+        <Link
+          href="/games"
+          className="text-primary hover:underline mt-4 inline-block"
+        >
           Back to Games
         </Link>
       </div>
@@ -37,17 +42,20 @@ export default function TagPage({ params }: TagPageParams) {
 
   // Filter games and blogs that have this tag
   const taggedGames = games.filter((game) =>
-    game.tags.some((t: any) => t.text === tag.text || t.href === tag.href)
+    game.tags.some((t: any) => t.text === tag.text || t.href === tag.href),
   );
 
   const taggedBlogs = blogs.filter((blog) =>
-    blog.tags.some((t: any) => t.text === tag.text || t.href === tag.href)
+    blog.tags.some((t: any) => t.text === tag.text || t.href === tag.href),
   );
 
   // Combine into unified content
   const unifiedContent: UnifiedContent[] = [
     ...taggedGames.map((game) => ({ type: "game" as const, content: game })),
-    ...taggedBlogs.map((article) => ({ type: "article" as const, content: article })),
+    ...taggedBlogs.map((article) => ({
+      type: "article" as const,
+      content: article,
+    })),
   ];
 
   return (
@@ -71,7 +79,8 @@ export default function TagPage({ params }: TagPageParams) {
       <div className="space-y-3">
         <CH1 text={`Tag: ${tag.text}`} />
         <p className="text-lg text-muted-foreground">
-          Found {unifiedContent.length} {unifiedContent.length === 1 ? "item" : "items"} with this tag
+          Found {unifiedContent.length}{" "}
+          {unifiedContent.length === 1 ? "item" : "items"} with this tag
         </p>
       </div>
 
@@ -80,7 +89,9 @@ export default function TagPage({ params }: TagPageParams) {
         <BlogComponent contents={unifiedContent} showFilters={true} />
       ) : (
         <div className="rounded-lg border border-border bg-card p-8 text-center">
-          <p className="text-muted-foreground">No content found for this tag.</p>
+          <p className="text-muted-foreground">
+            No content found for this tag.
+          </p>
         </div>
       )}
     </div>
