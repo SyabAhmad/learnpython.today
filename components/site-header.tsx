@@ -1,11 +1,12 @@
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { CommandMenu } from "@/components/command-menu"
-import { Icons } from "@/components/icons"
-import { MainNav } from "@/components/main-nav"
-import { MobileNav } from "@/components/mobile-nav"
-import { ModeToggle } from "@/components/mode-toggle"
-import { buttonVariants } from "@/components/ui/button"
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { CommandMenu } from "@/components/command-menu";
+import { Icons } from "@/components/icons";
+import { MainNav } from "@/components/main-nav";
+import { MobileNav } from "@/components/mobile-nav";
+import { ModeToggle } from "@/components/mode-toggle";
+import { buttonVariants } from "@/components/ui/button";
+import { User } from "lucide-react";
 
 export function SiteHeader() {
   return (
@@ -17,18 +18,26 @@ export function SiteHeader() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             <CommandMenu />
           </div>
-          <nav className="flex items-center">
+          <nav className="flex items-center gap-1">
             <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
+              href="/profile"
+              className={cn(
+                buttonVariants({
+                  variant: "ghost",
+                }),
+                "w-9 px-0",
+              )}
             >
+              <User className="h-5 w-5" />
+              <span className="sr-only">Profile</span>
+            </a>
+            <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
               <div
                 className={cn(
                   buttonVariants({
                     variant: "ghost",
                   }),
-                  "w-9 px-0"
+                  "w-9 px-0",
                 )}
               >
                 <Icons.gitHub className="h-4 w-4" />
@@ -45,7 +54,7 @@ export function SiteHeader() {
                   buttonVariants({
                     variant: "ghost",
                   }),
-                  "w-9 px-0"
+                  "w-9 px-0",
                 )}
               >
                 <Icons.linkedin className="h-4 w-4 fill-current" />
@@ -57,5 +66,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

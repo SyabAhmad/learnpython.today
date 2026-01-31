@@ -7,6 +7,8 @@ import { listGames } from "@/config/games/list";
 import { leetcodeGames } from "@/config/games/leetcode";
 import { syntaxGames } from "@/config/games/syntax";
 import { basicGames } from "@/config/games/basics";
+import { dictionaryGames } from "@/config/games/dictionaries";
+import { oopGames } from "@/config/games/oop";
 import { getRef } from "@/utils/gamesUtils";
 
 export const allGames: Game[] = [
@@ -16,7 +18,7 @@ export const allGames: Game[] = [
     .setTags([kt.syntax])
     .setSynopsis("Get started with our games and find out how to play.")
     .setText(
-      "To play the game, you need to put on your detective hat and find the lines of code to spot the bugs! Each game presents you with a snippet of code that contains an error. Your task is to identify the mistake and select the correct option from the provided choices that would fix the code."
+      "To play the game, you need to put on your detective hat and find the lines of code to spot the bugs! Each game presents you with a snippet of code that contains an error. Your task is to identify the mistake and select the correct option from the provided choices that would fix the code.",
     )
     .setLevel(0)
     .setDisabled(false)
@@ -30,8 +32,8 @@ export const allGames: Game[] = [
           new CodeLine("  print x", StateEnum.WRONG),
           new CodeLine("  Print x", StateEnum.WRONG),
         ],
-        "python"
-      )
+        "python",
+      ),
     )
     .build(),
   ...basicGames,
@@ -39,6 +41,8 @@ export const allGames: Game[] = [
   ...stringGames,
   ...syntaxGames,
   ...leetcodeGames,
+  ...dictionaryGames,
+  ...oopGames,
 ];
 
 export const games: Game[] = Object.values(allGames)

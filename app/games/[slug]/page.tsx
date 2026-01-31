@@ -4,15 +4,16 @@ import { games } from "@/config/games";
 import { CH1, GameDesc } from "@/components/custom-typo";
 import { GameLevel } from "@/components/game-level-component";
 import { CodeComponent } from "@/components/code-component";
+import { ScoreBadge } from "@/components/score-badge";
 
 function GameHeader({ game }: { game: Game }) {
   return (
-    <div className="justify-between flex flex-row w-full">
+    <div className="justify-between items-center flex flex-row w-full mb-8">
       <div className="grow-1 self-start">
         <GameLevel level={game.level} />
       </div>
       <div className="grow-1 self-end flex">
-        {/* Score and solved count will go here */}
+        <ScoreBadge />
       </div>
     </div>
   );

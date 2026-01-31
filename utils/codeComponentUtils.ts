@@ -4,7 +4,7 @@ import { Game } from "@/types/game";
 
 export function getDiscovered(
   codeBlock: CodeBlock,
-  codeLine: CodeLine
+  codeLine: CodeLine,
 ): CodeLine[] {
   const discovered: CodeLine[] = [];
   const lines = codeBlock.codeLines;
@@ -53,15 +53,15 @@ export function reviver(key: string, value: any): any {
             line.content,
             parseInt(line.state),
             line.hint,
-            line.score
-          )
+            parseInt(line.score) || 0,
+          ),
       );
       return new CodeBlock(
         codeLines,
         value.language,
         value.output,
         value.expected,
-        value.log
+        value.log,
       );
     }
   }
