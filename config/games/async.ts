@@ -14,7 +14,11 @@ export const asyncGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("async def fetch_data():", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "async def fetch_data():",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("  return await get_api_data()"),
           new CodeLine(""),
           new CodeLine("def fetch_data():", StateEnum.WRONG, "Missing async"),
@@ -35,8 +39,16 @@ export const asyncGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("async def main():"),
-          new CodeLine("  result = await long_operation()", StateEnum.CORRECT, "Correct!"),
-          new CodeLine("  result = long_operation()", StateEnum.WRONG, "Missing await"),
+          new CodeLine(
+            "  result = await long_operation()",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
+          new CodeLine(
+            "  result = long_operation()",
+            StateEnum.WRONG,
+            "Missing await",
+          ),
         ],
         "python",
       ),
@@ -56,7 +68,11 @@ export const asyncGames: Game[] = [
           new CodeLine(""),
           new CodeLine("asyncio.run(main())", StateEnum.CORRECT, "Python 3.7+"),
           new CodeLine("loop = asyncio.get_event_loop()"),
-          new CodeLine("loop.run_until_complete(main())", StateEnum.CORRECT, "Traditional way"),
+          new CodeLine(
+            "loop.run_until_complete(main())",
+            StateEnum.CORRECT,
+            "Traditional way",
+          ),
         ],
         "python",
       ),
@@ -92,10 +108,18 @@ export const asyncGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("async with session.get(url) as resp:", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "async with session.get(url) as resp:",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("  data = await resp.json()"),
           new CodeLine(""),
-          new CodeLine("with session.get(url) as resp:", StateEnum.WRONG, "Missing async"),
+          new CodeLine(
+            "with session.get(url) as resp:",
+            StateEnum.WRONG,
+            "Missing async",
+          ),
           new CodeLine("  data = resp.json()"),
         ],
         "python",
@@ -112,7 +136,11 @@ export const asyncGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("await asyncio.sleep(1)", StateEnum.CORRECT, "Non-blocking!"),
+          new CodeLine(
+            "await asyncio.sleep(1)",
+            StateEnum.CORRECT,
+            "Non-blocking!",
+          ),
           new CodeLine("time.sleep(1)", StateEnum.WRONG, "Blocks event loop"),
         ],
         "python",

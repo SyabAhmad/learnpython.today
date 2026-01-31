@@ -16,7 +16,11 @@ export const testingGames: Game[] = [
         [
           new CodeLine("import unittest"),
           new CodeLine(""),
-          new CodeLine("class TestMath(unittest.TestCase):", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "class TestMath(unittest.TestCase):",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("  def test_addition(self):"),
           new CodeLine("    self.assertEqual(1 + 1, 2)"),
         ],
@@ -35,8 +39,16 @@ export const testingGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("self.assertEqual(a, b)", StateEnum.CORRECT, "Correct!"),
-          new CodeLine("self.assertEquals(a, b)", StateEnum.WRONG, "Deprecated"),
-          new CodeLine("self.assert_equal(a, b)", StateEnum.WRONG, "Wrong name"),
+          new CodeLine(
+            "self.assertEquals(a, b)",
+            StateEnum.WRONG,
+            "Deprecated",
+          ),
+          new CodeLine(
+            "self.assert_equal(a, b)",
+            StateEnum.WRONG,
+            "Wrong name",
+          ),
         ],
         "python",
       ),
@@ -72,7 +84,11 @@ export const testingGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("def setUp(self):", StateEnum.CORRECT, "Runs before each test"),
+          new CodeLine(
+            "def setUp(self):",
+            StateEnum.CORRECT,
+            "Runs before each test",
+          ),
           new CodeLine("  self.test_data = [1, 2, 3]"),
           new CodeLine(""),
           new CodeLine("def tearDown(self):"),
@@ -95,7 +111,11 @@ export const testingGames: Game[] = [
         [
           new CodeLine("from unittest.mock import Mock"),
           new CodeLine(""),
-          new CodeLine("mock_func = Mock(return_value=42)", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "mock_func = Mock(return_value=42)",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("result = mock_func()"),
           new CodeLine("# result == 42"),
         ],
@@ -113,7 +133,11 @@ export const testingGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("@patch('module.external_func')", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "@patch('module.external_func')",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("def test_func(self, mock_external):"),
           new CodeLine("  mock_external.return_value = 100"),
         ],
@@ -131,7 +155,11 @@ export const testingGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("@pytest.mark.parametrize('input,expected', [", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "@pytest.mark.parametrize('input,expected', [",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("  (2, 4),"),
           new CodeLine("  (3, 9),"),
           new CodeLine("])"),
@@ -152,7 +180,11 @@ export const testingGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("@pytest.mark.skip(reason='WIP')", StateEnum.CORRECT, "Correct!"),
+          new CodeLine(
+            "@pytest.mark.skip(reason='WIP')",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
           new CodeLine("def test_feature():"),
           new CodeLine("  pass"),
         ],
@@ -171,7 +203,11 @@ export const testingGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("# Install coverage"),
-          new CodeLine("# pip install coverage", StateEnum.CORRECT, "Coverage.py"),
+          new CodeLine(
+            "# pip install coverage",
+            StateEnum.CORRECT,
+            "Coverage.py",
+          ),
           new CodeLine("# coverage run -m pytest"),
           new CodeLine("# coverage report"),
         ],
@@ -189,8 +225,16 @@ export const testingGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("self.assertEqual(a, b, 'Numbers should match')", StateEnum.CORRECT, "Correct!"),
-          new CodeLine("self.assertEqual(a, b, msg='Numbers should match')", StateEnum.CORRECT, "Also correct!"),
+          new CodeLine(
+            "self.assertEqual(a, b, 'Numbers should match')",
+            StateEnum.CORRECT,
+            "Correct!",
+          ),
+          new CodeLine(
+            "self.assertEqual(a, b, msg='Numbers should match')",
+            StateEnum.CORRECT,
+            "Also correct!",
+          ),
         ],
         "python",
       ),

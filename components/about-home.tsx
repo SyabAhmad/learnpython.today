@@ -12,15 +12,24 @@ export function AboutHome() {
       <div className="grid gap-8 md:grid-cols-2 items-center">
         <div className="space-y-4">
           <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Why LearnPython.Today?</h2>
-            <p className="text-muted-foreground text-lg">The most effective way to learn Python</p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+              Why LearnPython.Today?
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              The most effective way to learn Python
+            </p>
           </div>
           <p className="text-foreground leading-relaxed text-base">
-            Learning Python doesn't have to be boring or overwhelming. Our platform combines bite-sized articles, interactive games, and structured learning paths to help you build real Python skills.
+            Learning Python doesn't have to be boring or overwhelming. Our
+            platform combines bite-sized articles, interactive games, and
+            structured learning paths to help you build real Python skills.
           </p>
           <p className="text-foreground leading-relaxed text-base">
             Start with our{" "}
-            <a href="/blogs/intro" className="font-bold text-primary hover:underline">
+            <a
+              href="/blogs/intro"
+              className="font-bold text-primary hover:underline"
+            >
               introductory article
             </a>
             , dive into our{" "}
@@ -52,7 +61,8 @@ export function AboutHome() {
           </div>
           <h3 className="font-bold text-lg">Quick Wins</h3>
           <p className="text-sm text-muted-foreground">
-            5-minute articles and 2-minute games. Learn in small, digestible chunks that fit your schedule.
+            5-minute articles and 2-minute games. Learn in small, digestible
+            chunks that fit your schedule.
           </p>
         </div>
 
@@ -62,7 +72,8 @@ export function AboutHome() {
           </div>
           <h3 className="font-bold text-lg">Hand-Crafted Content</h3>
           <p className="text-sm text-muted-foreground">
-            Carefully curated articles and challenges designed to teach you Python the right way.
+            Carefully curated articles and challenges designed to teach you
+            Python the right way.
           </p>
         </div>
 
@@ -72,7 +83,8 @@ export function AboutHome() {
           </div>
           <h3 className="font-bold text-lg">Structured Paths</h3>
           <p className="text-sm text-muted-foreground">
-            Follow guided learning paths that build progressively from basics to advanced concepts.
+            Follow guided learning paths that build progressively from basics to
+            advanced concepts.
           </p>
         </div>
       </div>

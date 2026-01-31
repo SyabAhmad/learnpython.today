@@ -60,7 +60,11 @@ export const decoratorGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("@decorator1"),
-          new CodeLine("@decorator2", StateEnum.CORRECT, "decorator2 applies first"),
+          new CodeLine(
+            "@decorator2",
+            StateEnum.CORRECT,
+            "decorator2 applies first",
+          ),
           new CodeLine("def func():"),
           new CodeLine("  pass"),
         ],
@@ -81,7 +85,11 @@ export const decoratorGames: Game[] = [
           new CodeLine("from functools import wraps"),
           new CodeLine(""),
           new CodeLine("def my_decorator(func):"),
-          new CodeLine("  @wraps(func)", StateEnum.CORRECT, "Preserves metadata!"),
+          new CodeLine(
+            "  @wraps(func)",
+            StateEnum.CORRECT,
+            "Preserves metadata!",
+          ),
           new CodeLine("  def wrapper(*args, **kwargs):"),
           new CodeLine("    return func(*args, **kwargs)"),
           new CodeLine("  return wrapper"),
@@ -150,7 +158,11 @@ export const decoratorGames: Game[] = [
           new CodeLine("    return a + b"),
           new CodeLine(""),
           new CodeLine("  @staticmethod"),
-          new CodeLine("  def add(self, a, b):", StateEnum.WRONG, "staticmethod doesn't need self"),
+          new CodeLine(
+            "  def add(self, a, b):",
+            StateEnum.WRONG,
+            "staticmethod doesn't need self",
+          ),
         ],
         "python",
       ),
@@ -187,7 +199,11 @@ export const decoratorGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("def my_decorator(func):"),
-          new CodeLine("  print('Decorating')", StateEnum.CORRECT, "Runs at definition"),
+          new CodeLine(
+            "  print('Decorating')",
+            StateEnum.CORRECT,
+            "Runs at definition",
+          ),
           new CodeLine("  def wrapper():"),
           new CodeLine("    print('Calling')"),
           new CodeLine("    return func()"),
@@ -212,7 +228,11 @@ export const decoratorGames: Game[] = [
           new CodeLine("def timing_decorator(func):"),
           new CodeLine("  @wraps(func)"),
           new CodeLine("  def wrapper(*args, **kwargs):"),
-          new CodeLine("    start = time.time()", StateEnum.CORRECT, "Record start time"),
+          new CodeLine(
+            "    start = time.time()",
+            StateEnum.CORRECT,
+            "Record start time",
+          ),
           new CodeLine("    result = func(*args, **kwargs)"),
           new CodeLine("    end = time.time()"),
           new CodeLine("    print(f'Took {end - start}s')"),

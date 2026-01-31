@@ -19,8 +19,12 @@ export default function Home() {
 
   // Only include a limited set of games and blogs for home page performance
   const unifiedContent: UnifiedContent[] = [
-    ...games.slice(0, INITIAL_LOAD_COUNT / 2).map((game) => ({ type: "game" as const, content: game })),
-    ...blogs.slice(0, INITIAL_LOAD_COUNT / 2).map((article) => ({ type: "article" as const, content: article })),
+    ...games
+      .slice(0, INITIAL_LOAD_COUNT / 2)
+      .map((game) => ({ type: "game" as const, content: game })),
+    ...blogs
+      .slice(0, INITIAL_LOAD_COUNT / 2)
+      .map((article) => ({ type: "article" as const, content: article })),
   ];
 
   return (
@@ -46,7 +50,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <Button 
+            <Button
               className="bg-primary hover:bg-primary/90 text-white flex-shrink-0 shadow-lg group-hover:shadow-primary/30 transition-all"
               size="sm"
             >
@@ -71,19 +75,30 @@ export default function Home() {
         {/* CTA Buttons */}
         <div className="flex flex-wrap gap-4 pt-4">
           <Link href="/games">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-white shadow-lg"
+            >
               <ControllerIcon className="mr-2" />
               Play Games
             </Button>
           </Link>
           <Link href="/blogs">
-            <Button size="lg" variant="outline" className="border-border hover:bg-muted">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-border hover:bg-muted"
+            >
               <BookOpen className="mr-2 h-5 w-5" />
               Read Articles
             </Button>
           </Link>
           <Link href="/paths">
-            <Button size="lg" variant="outline" className="border-border hover:bg-muted">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-border hover:bg-muted"
+            >
               <ArrowRight className="mr-2 h-5 w-5" />
               Learning Paths
             </Button>
@@ -97,16 +112,25 @@ export default function Home() {
       {/* Content Section with Heading */}
       <div className="space-y-8">
         <div className="space-y-2">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Featured Content</h2>
-          <p className="text-muted-foreground text-lg">Handpicked games and articles to get you started</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Featured Content
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Handpicked games and articles to get you started
+          </p>
         </div>
         <BlogComponent contents={unifiedContent} showFilters={false} />
-        
+
         {/* View All Button */}
         <div className="flex justify-center pt-8">
           <Link href="/games">
-            <Button size="lg" variant="outline" className="border-border hover:bg-muted">
-              View All {games.length} Games <ArrowRight className="ml-2 h-5 w-5" />
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-border hover:bg-muted"
+            >
+              View All {games.length} Games{" "}
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
         </div>
