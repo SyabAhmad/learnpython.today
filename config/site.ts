@@ -4,9 +4,11 @@ export const siteConfig = {
   ogImage: "/favicon.ico",
   description: "Website for the LearnPython.Today blog.",
   links: {
-    linkedin: "https://www.linkedin.com/in/piquard/",
-    github: "https://github.com/git-Pqrd/learnpython.today",
-    mentee: "https://syab.tech/mentee",
+    linkedin: "https://linkedin.com/in/syedsyab",
+    github: "https://github.com/syabahmad",
+    mentee: "https://syab.tech",
+    twitter: "https://twitter.com/syabsays",
+    instagram: "https://instagram.com/syedsyab",
   },
 };
 

@@ -4,32 +4,20 @@ import { CH1, boldPClasses } from "@/components/custom-typo";
 export default function About() {
     return (
         <div className="text-lg py-12 max-w-4xl ">
-            <CH1 text={"Hi! I'm François, the creator of LearnPython.Today."} />
+            <CH1 text={"Hi! I'm Syed Syab Ahmad, creator of LearnPython.Today."} />
             <div className="flex items-center md:items-end py-3 flex-col md:flex-row">
                 <p className={boldPClasses}>
-                    I got into coding because I wanted to{" "}
-                    <b>solve real-world problems.</b> This problem-solving-driven
-                    approach, in my opinion, is a great way to approach coding. Adopting
-                    this self-taught coder methodology has enabled me to tackle
-                    increasingly complex problems, eventually leading me to become a
-                    software engineer at Google.
+                    <b>Syed Syab Ahmad (MenteE's Leader 🥀)</b> is a Full-Stack Web and Machine Learning Engineer and AI researcher with strong experience in Python, React.js, TensorFlow, OpenCV, SQL, and modern AI tooling. I've built multiple ML-powered and generative AI projects including DataFit, Talk to PDF, Vid2Txt, an AI Research Paper Generator, RAG-based product chat systems, and disease classification models using CNN+LSTM.
                 </p>
             </div>
             <p className={`${boldPClasses} mt-4`}>
                 <b>
-                    This blog is my attempt at sharing the lessons I've learned, aiming to
-                    simplify learning Python (and coding in general) for everyone.
+                    I've published Python packages, developed ETL pipelines, Streamlit apps, and ML systems end-to-end—from data cleaning and feature engineering to model training and deployment.
                 </b>{" "}
-                Whether you're starting from zero or looking to advance, I'd like to
-                help you through the world of coding, just as I navigated it myself.
+                With a Software Engineering degree and industry experience across startups and tech programs, I focus on practical AI solutions, multi-agent LLM workflows, and production-ready ML applications.
                 <br />
                 <br />
-                Having walked the self-taught path to becoming a software engineer, I
-                understand that my learning method might not be the gold standard, but
-                it's a path that has proven its worth for me. I share my experiences and
-                insights with the hope that they can serve as a practical guide for
-                others. My approach is really based in trial, error, and eventual
-                success.
+                LearnPython.Today is my platform for sharing knowledge about Python, machine learning, and web development. Whether you're starting from zero or looking to advance in AI and full-stack development, I'd like to help you navigate the world of coding and AI, just as I've navigated it myself. My approach is built on real-world experience, continuous learning, and practical problem-solving.
             </p>
         </div>
     );
