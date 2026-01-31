@@ -218,5 +218,24 @@ export const games: Game[] = Object.values(allGames)
   .filter((game: Game) => !game.disabled)
   .map((game: Game) => {
     game.ref = game.ref < 0 ? game.ref : getRef(game);
-    return game;
+    // Ensure all properties are serializable for static export
+    return {
+      href: game.href,
+      title: game.title,
+      tags: Array.isArray(game.tags) 
+        ? game.tags.map((tag: any) => ({
+            text: tag.text || tag.constructor.name,
+            href: tag.href || "",
+          }))
+        : [],
+      synopsis: game.synopsis,
+      text: game.text,
+      level: game.level,
+      ref: game.ref,
+      codeBlock: game.codeBlock,
+      extern: game.extern,
+      starred: game.starred,
+      disabled: game.disabled,
+      category: game.category,
+    } as Game;
   });
