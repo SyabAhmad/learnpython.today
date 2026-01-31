@@ -1,4 +1,3 @@
-"use client";
 import { CH1 } from "@/components/custom-typo";
 import { BlogComponent } from "@/components/blog-component";
 import { knownTags as allTags } from "@/config/tag";
@@ -86,4 +85,12 @@ export default function TagPage({ params }: TagPageParams) {
       )}
     </div>
   );
+}
+
+export function generateStaticParams() {
+  return Object.entries(allTags).map(([_, tag]) => {
+    // Extract slug from href like "/tags/python/" -> "python"
+    const slug = tag.href.split("/").filter(Boolean).pop() || "";
+    return { slug };
+  });
 }

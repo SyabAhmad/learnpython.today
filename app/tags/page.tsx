@@ -1,4 +1,3 @@
-"use client";
 import { CH1, SubTitle } from "@/components/custom-typo";
 import { knownTags as allTags } from "@/config/tag";
 import { games } from "@/config/games";
