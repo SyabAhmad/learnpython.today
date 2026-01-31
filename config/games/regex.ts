@@ -29,6 +29,17 @@ export const regexGames: Game[] = [
           new CodeLine(
             "from regular_expressions import search",
             StateEnum.WRONG,
+            "No such module exists in the standard library.",
+          ),
+          new CodeLine(
+            "from re import *",
+            StateEnum.WRONG,
+            "This works but is bad practice; 'import re' is preferred.",
+          ),
+          new CodeLine(
+            "import regexp",
+            StateEnum.WRONG,
+            "'regexp' is not the standard name; use 're' instead.",
           ),
         ],
         "python",
@@ -58,8 +69,8 @@ export const regexGames: Game[] = [
           ),
           new CodeLine(
             "m = re.match('is', text)",
-            StateEnum.NORMAL,
-            "This will return None because 'is' is not at the start.",
+            StateEnum.WRONG,
+            "This returns None because 'is' is not at the start.",
           ),
           new CodeLine(
             "m = re.search('is', text)",
@@ -69,8 +80,18 @@ export const regexGames: Game[] = [
           ),
           new CodeLine(
             "m = re.match('Python', text)",
-            StateEnum.NORMAL,
-            "This would work, but match() only checks the beginning of the string.",
+            StateEnum.WRONG,
+            "This works but doesn't demonstrate the difference from search().",
+          ),
+          new CodeLine(
+            "m = re.findall('is', text)",
+            StateEnum.WRONG,
+            "findall() returns a list of all matches, not a match object.",
+          ),
+          new CodeLine(
+            "m = re.find('is', text)",
+            StateEnum.ERROR,
+            "There's no 're.find()' method; use 'search()' or 'match()'.",
           ),
         ],
         "python",
@@ -110,6 +131,16 @@ export const regexGames: Game[] = [
             StateEnum.WRONG,
             "This is C# syntax, not Python.",
           ),
+          new CodeLine(
+            "pattern = `\d`",
+            StateEnum.WRONG,
+            "Backticks are used in JavaScript/Shell, not Python.",
+          ),
+          new CodeLine(
+            "pattern = raw('\d')",
+            StateEnum.WRONG,
+            "There's no 'raw()' function; use the r prefix instead.",
+          ),
         ],
         "python",
       ),
@@ -147,6 +178,17 @@ export const regexGames: Game[] = [
           new CodeLine(
             "all_pts = re.search_all('\d+', prices)",
             StateEnum.WRONG,
+            "There's no 'search_all()' method in the re module.",
+          ),
+          new CodeLine(
+            "all_pts = re.match_all('\d+', prices)",
+            StateEnum.WRONG,
+            "There's no 'match_all()' method; use 'findall()' instead.",
+          ),
+          new CodeLine(
+            "all_pts = re.finditer('\d+', prices)",
+            StateEnum.WRONG,
+            "finditer() returns an iterator of match objects, not a list of strings.",
           ),
         ],
         "python",
@@ -182,7 +224,21 @@ export const regexGames: Game[] = [
             "Correct! group(1) retrieves the first captured group.",
             10,
           ),
-          new CodeLine("user = m[1]", StateEnum.WRONG),
+          new CodeLine(
+            "user = m[1]",
+            StateEnum.WRONG,
+            "Match objects don't support indexing; use .group() instead.",
+          ),
+          new CodeLine(
+            "user = m.groups()[0]",
+            StateEnum.WRONG,
+            "This works but is more verbose; .group(1) is preferred.",
+          ),
+          new CodeLine(
+            "user = m.get(1)",
+            StateEnum.WRONG,
+            "Match objects don't have a 'get()' method.",
+          ),
         ],
         "python",
       ),

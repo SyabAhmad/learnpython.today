@@ -19,7 +19,23 @@ export const testingGames: Game[] = [
           new CodeLine(
             "class TestMath(unittest.TestCase):",
             StateEnum.CORRECT,
-            "Correct!",
+            "Correct! TestCase is the right base class",
+            10,
+          ),
+          new CodeLine(
+            "class TestMath(unittest.TestSuite):",
+            StateEnum.WRONG,
+            "TestSuite is for grouping tests",
+          ),
+          new CodeLine(
+            "class TestMath(unittest.Test):",
+            StateEnum.WRONG,
+            "unittest.Test doesn't exist",
+          ),
+          new CodeLine(
+            "class TestMath(Test):",
+            StateEnum.WRONG,
+            "Must inherit from unittest.TestCase",
           ),
           new CodeLine("  def test_addition(self):"),
           new CodeLine("    self.assertEqual(1 + 1, 2)"),
@@ -42,12 +58,22 @@ export const testingGames: Game[] = [
           new CodeLine(
             "self.assertEquals(a, b)",
             StateEnum.WRONG,
-            "Deprecated",
+            "Deprecated - use assertEqual instead.",
           ),
           new CodeLine(
             "self.assert_equal(a, b)",
             StateEnum.WRONG,
-            "Wrong name",
+            "Wrong name - Python uses camelCase: assertEqual.",
+          ),
+          new CodeLine(
+            "self.assertEq(a, b)",
+            StateEnum.WRONG,
+            "This method doesn't exist; use assertEqual.",
+          ),
+          new CodeLine(
+            "assert a == b",
+            StateEnum.WRONG,
+            "Plain assert works but doesn't provide unittest's helpful error messages.",
           ),
         ],
         "python",
@@ -66,7 +92,17 @@ export const testingGames: Game[] = [
         [
           new CodeLine("import pytest"),
           new CodeLine(""),
-          new CodeLine("@pytest.fixture", StateEnum.CORRECT, "Correct!"),
+          new CodeLine("@pytest.fixture", StateEnum.CORRECT, "Correct!", 10),
+          new CodeLine(
+            "@pytest.mark.fixture",
+            StateEnum.WRONG,
+            "Wrong: should use @pytest.fixture not @pytest.mark.fixture",
+          ),
+          new CodeLine(
+            "@fixture",
+            StateEnum.WRONG,
+            "Missing pytest module reference",
+          ),
           new CodeLine("def sample_data():"),
           new CodeLine("  return [1, 2, 3]"),
         ],
@@ -88,6 +124,17 @@ export const testingGames: Game[] = [
             "def setUp(self):",
             StateEnum.CORRECT,
             "Runs before each test",
+            10,
+          ),
+          new CodeLine(
+            "def setup(self):",
+            StateEnum.WRONG,
+            "Wrong: should be setUp with capital U",
+          ),
+          new CodeLine(
+            "def setup_method(self):",
+            StateEnum.WRONG,
+            "That's for pytest, not unittest",
           ),
           new CodeLine("  self.test_data = [1, 2, 3]"),
           new CodeLine(""),
@@ -114,7 +161,18 @@ export const testingGames: Game[] = [
           new CodeLine(
             "mock_func = Mock(return_value=42)",
             StateEnum.CORRECT,
-            "Correct!",
+            "Correct! Mock with return_value",
+            10,
+          ),
+          new CodeLine(
+            "mock_func = Mock(returns=42)",
+            StateEnum.WRONG,
+            "Wrong: should be return_value not returns",
+          ),
+          new CodeLine(
+            "mock_func = MagicMock(value=42)",
+            StateEnum.WRONG,
+            "Should use Mock, not MagicMock here",
           ),
           new CodeLine("result = mock_func()"),
           new CodeLine("# result == 42"),
@@ -136,7 +194,18 @@ export const testingGames: Game[] = [
           new CodeLine(
             "@patch('module.external_func')",
             StateEnum.CORRECT,
-            "Correct!",
+            "Correct! Full path to function",
+            10,
+          ),
+          new CodeLine(
+            "@patch('external_func')",
+            StateEnum.WRONG,
+            "Must use full module path",
+          ),
+          new CodeLine(
+            "@mock('module.external_func')",
+            StateEnum.WRONG,
+            "Should use @patch not @mock",
           ),
           new CodeLine("def test_func(self, mock_external):"),
           new CodeLine("  mock_external.return_value = 100"),
@@ -158,7 +227,18 @@ export const testingGames: Game[] = [
           new CodeLine(
             "@pytest.mark.parametrize('input,expected', [",
             StateEnum.CORRECT,
-            "Correct!",
+            "Correct! Proper parametrize syntax",
+            10,
+          ),
+          new CodeLine(
+            "@pytest.parametrize('input,expected', [",
+            StateEnum.WRONG,
+            "Should use @pytest.mark.parametrize",
+          ),
+          new CodeLine(
+            "@parametrize('input,expected', [",
+            StateEnum.WRONG,
+            "Missing pytest module",
           ),
           new CodeLine("  (2, 4),"),
           new CodeLine("  (3, 9),"),
@@ -183,7 +263,18 @@ export const testingGames: Game[] = [
           new CodeLine(
             "@pytest.mark.skip(reason='WIP')",
             StateEnum.CORRECT,
-            "Correct!",
+            "Correct! Skip with reason",
+            10,
+          ),
+          new CodeLine(
+            "@skip(reason='WIP')",
+            StateEnum.WRONG,
+            "Must use @pytest.mark.skip",
+          ),
+          new CodeLine(
+            "@pytest.skip('WIP')",
+            StateEnum.WRONG,
+            "This is a function, not a decorator",
           ),
           new CodeLine("def test_feature():"),
           new CodeLine("  pass"),
@@ -206,7 +297,18 @@ export const testingGames: Game[] = [
           new CodeLine(
             "# pip install coverage",
             StateEnum.CORRECT,
-            "Coverage.py",
+            "Correct! Coverage.py is the standard",
+            10,
+          ),
+          new CodeLine(
+            "# pip install pytest-coverage",
+            StateEnum.WRONG,
+            "Wrong package name - use coverage",
+          ),
+          new CodeLine(
+            "# pip install codecov",
+            StateEnum.WRONG,
+            "codecov is for CI/CD, not local coverage",
           ),
           new CodeLine("# coverage run -m pytest"),
           new CodeLine("# coverage report"),
@@ -226,14 +328,31 @@ export const testingGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine(
+            "self.assertEqual(a, b, message='Numbers should match')",
+            StateEnum.ERROR,
+            "Wrong parameter name - use 'msg' not 'message'.",
+          ),
+          new CodeLine(
             "self.assertEqual(a, b, 'Numbers should match')",
             StateEnum.CORRECT,
-            "Correct!",
+            "Correct! Positional argument works.",
+            10,
           ),
           new CodeLine(
             "self.assertEqual(a, b, msg='Numbers should match')",
             StateEnum.CORRECT,
-            "Also correct!",
+            "Also correct! Keyword argument is explicit.",
+            10,
+          ),
+          new CodeLine(
+            "self.assertEqual(a, b, error='Numbers should match')",
+            StateEnum.WRONG,
+            "Wrong parameter name - it's 'msg' not 'error'.",
+          ),
+          new CodeLine(
+            "self.assertEqual(a, b): 'Numbers should match'",
+            StateEnum.WRONG,
+            "Invalid syntax - can't use colon outside function definition.",
           ),
         ],
         "python",

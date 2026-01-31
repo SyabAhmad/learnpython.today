@@ -25,11 +25,20 @@ export const recursionGames: Game[] = [
             10,
           ),
           new CodeLine(
+            "if n == 1: return 1",
+            StateEnum.WRONG,
+            "Could work for positive integers, but 0 is more standard",
+          ),
+          new CodeLine(
             "while n > 0:",
-            StateEnum.ERROR,
+            StateEnum.WRONG,
             "Recursion usually replaces 'while' loops, it doesn't wrap them like this.",
           ),
-          new CodeLine("exit()", StateEnum.WRONG),
+          new CodeLine(
+            "exit()",
+            StateEnum.WRONG,
+            "This would terminate the program, not stop the recursion properly",
+          ),
         ],
         "python",
       ),
@@ -70,6 +79,11 @@ export const recursionGames: Game[] = [
             StateEnum.WRONG,
             "This moves further away from the base condition of n <= 0.",
           ),
+          new CodeLine(
+            "  countdown(1)",
+            StateEnum.WRONG,
+            "This would cause infinite recursion with countdown(1) -> countdown(1) -> ...",
+          ),
         ],
         "python",
       ),
@@ -92,7 +106,11 @@ export const recursionGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("# What happens when you recurse too many times?"),
-          new CodeLine("RecursionLimitError", StateEnum.WRONG),
+          new CodeLine(
+            "RecursionLimitError",
+            StateEnum.WRONG,
+            "Close, but the actual exception name is different.",
+          ),
           new CodeLine(
             "RecursionError",
             StateEnum.CORRECT,
@@ -103,6 +121,16 @@ export const recursionGames: Game[] = [
             "MemoryError",
             StateEnum.ERROR,
             "While recursion uses memory, the specific error for deep recursion is RecursionError.",
+          ),
+          new CodeLine(
+            "StackOverflowError",
+            StateEnum.WRONG,
+            "That's Java/C#. Python uses RecursionError.",
+          ),
+          new CodeLine(
+            "MaxDepthExceeded",
+            StateEnum.WRONG,
+            "This is not a real Python exception.",
           ),
         ],
         "python",
@@ -126,7 +154,11 @@ export const recursionGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("# Python's stance on Tail Call Optimization (TCO)"),
-          new CodeLine("Python supports TCO", StateEnum.WRONG),
+          new CodeLine(
+            "Python supports TCO",
+            StateEnum.WRONG,
+            "Unfortunately, Python does not optimize tail calls.",
+          ),
           new CodeLine(
             "Python does not support TCO",
             StateEnum.CORRECT,
@@ -136,6 +168,17 @@ export const recursionGames: Game[] = [
           new CodeLine(
             "Python only supports TCO for integers",
             StateEnum.ERROR,
+            "Python doesn't have TCO at all, not even for specific types.",
+          ),
+          new CodeLine(
+            "Python supports TCO with @tailcall decorator",
+            StateEnum.WRONG,
+            "There's no built-in @tailcall decorator in Python.",
+          ),
+          new CodeLine(
+            "Python supports TCO in PyPy only",
+            StateEnum.WRONG,
+            "Even PyPy doesn't implement TCO by default.",
           ),
         ],
         "python",
@@ -171,7 +214,21 @@ export const recursionGames: Game[] = [
             StateEnum.ERROR,
             "This looks more like a factorial calculation than Fibonacci.",
           ),
-          new CodeLine("  return fib(n) - 1", StateEnum.WRONG),
+          new CodeLine(
+            "  return fib(n) - 1",
+            StateEnum.WRONG,
+            "This would cause infinite recursion without ever reaching the base case.",
+          ),
+          new CodeLine(
+            "  return fib(n-1) - fib(n-2)",
+            StateEnum.WRONG,
+            "Fibonacci adds the previous two values, not subtracts them.",
+          ),
+          new CodeLine(
+            "  return fib(n-2) + 1",
+            StateEnum.WRONG,
+            "This only calls fib(n-2) and ignores fib(n-1).",
+          ),
         ],
         "python",
       ),

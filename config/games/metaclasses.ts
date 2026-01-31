@@ -19,7 +19,11 @@ export const metaclassGames: Game[] = [
           new CodeLine(
             "print(type(MyClass)) # What is the type of a class itself?",
           ),
-          new CodeLine("'class'", StateEnum.WRONG),
+          new CodeLine(
+            "'class'",
+            StateEnum.WRONG,
+            "'class' is a keyword, not a type.",
+          ),
           new CodeLine(
             "'type'",
             StateEnum.CORRECT,
@@ -30,6 +34,16 @@ export const metaclassGames: Game[] = [
             "'object'",
             StateEnum.ERROR,
             "Classes are objects, but their *type* is 'type'.",
+          ),
+          new CodeLine(
+            "'classtype'",
+            StateEnum.WRONG,
+            "There's no 'classtype' in Python; classes have type 'type'.",
+          ),
+          new CodeLine(
+            "'meta'",
+            StateEnum.WRONG,
+            "'meta' isn't a built-in type; the metaclass is 'type'.",
           ),
         ],
         "python",
@@ -101,6 +115,11 @@ export const metaclassGames: Game[] = [
             StateEnum.ERROR,
             "This would make MyMeta a parent class via inheritance, not its metaclass.",
           ),
+          new CodeLine(
+            "class User(__metaclass__=MyMeta):",
+            StateEnum.WRONG,
+            "Python 2 used __metaclass__, but Python 3 uses metaclass= instead.",
+          ),
           new CodeLine("@MyMeta"),
           new CodeLine(
             "class User: pass",
@@ -142,6 +161,16 @@ export const metaclassGames: Game[] = [
             StateEnum.ERROR,
             "__init__ initializes an existing object; __new__ creates it.",
           ),
+          new CodeLine(
+            "    return type(name, bases, attrs)",
+            StateEnum.WRONG,
+            "This works but doesn't call the parent's __new__, breaking inheritance.",
+          ),
+          new CodeLine(
+            "    return cls(name, bases, attrs)",
+            StateEnum.WRONG,
+            "This would cause infinite recursion by calling the metaclass again.",
+          ),
         ],
         "python",
       ),
@@ -164,14 +193,32 @@ export const metaclassGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("# Metaclasses are best for:"),
-          new CodeLine("Simple math calculations", StateEnum.WRONG),
+          new CodeLine(
+            "Simple math calculations",
+            StateEnum.WRONG,
+            "Regular functions or methods handle this better.",
+          ),
           new CodeLine(
             "API validation and class registration",
             StateEnum.CORRECT,
             "Correct! Metaclasses are powerful for enforcing standards across many classes.",
             10,
           ),
-          new CodeLine("Handling user input", StateEnum.ERROR),
+          new CodeLine(
+            "Handling user input",
+            StateEnum.ERROR,
+            "User input is handled by regular functions, not metaclasses.",
+          ),
+          new CodeLine(
+            "String manipulation",
+            StateEnum.WRONG,
+            "String methods are for this; metaclasses are overkill.",
+          ),
+          new CodeLine(
+            "File I/O operations",
+            StateEnum.WRONG,
+            "File operations don't benefit from metaclasses.",
+          ),
         ],
         "python",
       ),

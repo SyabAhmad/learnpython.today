@@ -32,6 +32,16 @@ export const oopGames: Game[] = [
             StateEnum.WRONG,
             "'cls' is used for class methods, not instance methods.",
           ),
+          new CodeLine(
+            "  def bark(this):",
+            StateEnum.WRONG,
+            "'this' is used in Java/C++, but Python uses 'self'.",
+          ),
+          new CodeLine(
+            "  def bark(me):",
+            StateEnum.WRONG,
+            "While technically valid, 'self' is the Python convention.",
+          ),
           new CodeLine("    print('Woof!')", StateEnum.NORMAL),
         ],
         "python",
@@ -69,6 +79,16 @@ export const oopGames: Game[] = [
             "  def cat(self, name):",
             StateEnum.WRONG,
             "Constructors in Python are always named __init__.",
+          ),
+          new CodeLine(
+            "  def init(self, name):",
+            StateEnum.WRONG,
+            "Missing the double underscores (__) on both sides.",
+          ),
+          new CodeLine(
+            "  def __constructor__(self, name):",
+            StateEnum.WRONG,
+            "Python doesn't use __constructor__; it's always __init__.",
           ),
           new CodeLine("    self.name = name", StateEnum.NORMAL),
         ],

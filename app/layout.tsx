@@ -11,6 +11,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import type { Viewport } from "next";
 import { Inter } from "next/font/google";
 import { JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains = JetBrains_Mono({
@@ -91,6 +92,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={`${inter.variable} ${jetbrains.variable}`}
         suppressHydrationWarning
       >
+        <head>
+          {/* Google Analytics */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-P1PMEP5MHK"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-P1PMEP5MHK');
+            `}
+          </Script>
+        </head>
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
