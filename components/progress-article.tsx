@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 import { useProgressStore } from "@/stores/progress-store";
 import { useReward } from "react-rewards";
 
-export function ProgressArticle({ href, className }: { href: string, className?: string }) {
+export function ProgressArticle({ href }: { href: string }) {
   const isContentCompleted = useProgressStore.getState().isContentCompleted;
-  const completedArticles = useProgressStore.getState().completedArticles;
   const completeArticle = useProgressStore.getState().completeArticle;
   const [progress, setProgress] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
   const { reward } = useReward("rewardId", "confetti", {
     elementCount: 150,
     angle: 210,
@@ -20,35 +20,42 @@ export function ProgressArticle({ href, className }: { href: string, className?:
       const scrollTop = window.scrollY;
       const scrollableHeight = documentHeight - windowHeight;
 
-      if (progress > 97 && !isContentCompleted(href)) {
-        if (!isContentCompleted(href)) {
-          completeArticle(href);
-        }
-        reward();
-      }
-
       if (scrollableHeight > 0) {
         const newProgress = (scrollTop / scrollableHeight) * 100;
         setProgress(Math.max(progress, Math.min(newProgress, 100)));
+
+        if (newProgress > 97 && !isCompleted) {
+          if (!isContentCompleted(href)) {
+            completeArticle(href);
+            setIsCompleted(true);
+            reward();
+          }
+        }
       } else {
         setProgress(100);
-        reward();
-        window.removeEventListener("scroll", handleScroll);
+        if (!isCompleted) {
+          completeArticle(href);
+          setIsCompleted(true);
+          reward();
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Call once to set initial progress
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [progress, href, completeArticle, isContentCompleted, reward]);
+  }, [href, completeArticle, isContentCompleted, reward, isCompleted]);
 
   return (
-    <div id="rewardId" className={`w-full xl:block h-1 bg-gray-200 z-50 ${className}`}>
+    <div
+      id="rewardId"
+      className="relative w-full h-2 bg-secondary rounded-full overflow-hidden"
+    >
       <div
-        className=" bg-green-700 h-1 transition-all duration-300 ease-out"
+        className="h-full bg-gradient-to-r from-green-500 to-emerald-600 transition-all duration-300 ease-out rounded-full"
         style={{ width: `${progress}%` }}
-      ></div>
+      />
     </div>
   );
 }

@@ -94,7 +94,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={cn(
             "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
+            fontSans.variable,
           )}
           suppressHydrationWarning
         >
@@ -104,10 +104,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             enableSystem
             disableTransitionOnChange
           >
-            <div className="relative flex min-h-screen w-full flex-col ">
+            <div className="relative flex min-h-screen w-full flex-col">
               <SiteHeader />
-              <div className="flex-1 p-1 py-8 w-full mx-auto max-w-[2000px]">
-                {children}
+              <div className="flex-1 w-full">
+                <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
+                  {children}
+                </div>
               </div>
               <SiteFooter />
             </div>

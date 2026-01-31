@@ -1,5 +1,6 @@
 import fs from "fs";
 import { notFound } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 import { blogs } from "@/config/blogs";
 import { remark } from "remark";
 import html from "remark-html";
@@ -27,60 +28,90 @@ export default async function BlogComponent({
   params: { slug: string };
 }) {
   const article: Article = blogs.filter(
-    (article) => article.href == params.slug
+    (article) => article.href == params.slug,
   )[0];
   if (!article) return notFound();
 
   const content = await markdownToHtml(article.href);
   return (
-    <div className="px-1 max-w-full items-center relative  md:px-8 flex-col flex">
+    <div className="space-y-0">
       <Head>
         <title>{`${siteConfig.name} - ${article.title}`}</title>
         <meta name="description">{article.synopsis}</meta>
       </Head>
-        <ProgressArticle href={article.href} className="fixed top-0 " />
-      <div className="relative max-w-[1400px]">
-        {stringToTags(content).map((c, index) =>
-          c.type == "normal" ? (
-            <div
-              key={index}
-              className="markdown max-w-[1000px] md:px-4"
-              dangerouslySetInnerHTML={{ __html: c.content }}
-            />
-          ) : (
-            <div key={index} className="relative w-full mr-3 max-w-[1200px]">
-              <SyntaxHighlighter
+
+      {/* Progress Bar - Not Fixed */}
+      <div className="pb-6">
+        <ProgressArticle href={article.href} />
+      </div>
+
+      {/* Main Content Area */}
+      <div className="space-y-8">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <a href="/blogs" className="hover:text-primary transition-colors">
+            Blog
+          </a>
+          <ChevronLeft className="h-4 w-4 rotate-180" />
+          <span className="text-primary font-medium">{article.title}</span>
+        </div>
+
+        {/* Article Header */}
+        <div className="space-y-4 border-b border-border/50 pb-8">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+            {article.title}
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
+            {article.synopsis}
+          </p>
+        </div>
+
+        {/* Article Content */}
+        <div className="max-w-3xl space-y-6">
+          {stringToTags(content).map((c, index) =>
+            c.type == "normal" ? (
+              <div
                 key={index}
-                style={theme}
-                customStyle={{
-                  margin: "1px",
-                  padding: "5px",
-                  paddingLeft: "15px",
-                  cursor: "text",
-                }}
-                language={c.language || "python"}
-                showLineNumbers={false}
-                codeTagProps={{
-                  className: "codeLine py-0 rounded-md",
-                }}
-                wrapLongLines={true}
-                wrapLines={true}
-                lineProps={() => {
-                  return {
-                    style: {
-                      cursor: "pointer",
-                      fontWeight: "bolder",
-                      display: "block",
-                    },
-                  };
-                }}
+                className="markdown prose prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: c.content }}
+              />
+            ) : (
+              <div
+                key={index}
+                className="relative w-full rounded-lg overflow-hidden"
               >
-                {c.content}
-              </SyntaxHighlighter>
-              <CopyToClip content={c.content} />
-            </div>
-          )
-        )}
+                <SyntaxHighlighter
+                  key={index}
+                  style={theme}
+                  customStyle={{
+                    margin: "0",
+                    padding: "16px",
+                    cursor: "text",
+                    borderRadius: "8px",
+                  }}
+                  language={c.language || "python"}
+                  showLineNumbers={true}
+                  codeTagProps={{
+                    className: "codeLine py-1",
+                  }}
+                  wrapLongLines={true}
+                  wrapLines={true}
+                  lineProps={() => {
+                    return {
+                      style: {
+                        cursor: "pointer",
+                        display: "block",
+                      },
+                    };
+                  }}
+                >
+                  {c.content}
+                </SyntaxHighlighter>
+                <CopyToClip content={c.content} />
+              </div>
+            ),
+          )}
+        </div>
       </div>
     </div>
   );

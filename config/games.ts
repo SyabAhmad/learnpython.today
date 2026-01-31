@@ -20,6 +20,9 @@ import { collectionGames } from "@/config/games/collections";
 import { algorithmGames } from "@/config/games/algorithms";
 import { recursionGames } from "@/config/games/recursion";
 import { metaclassGames } from "@/config/games/metaclasses";
+import { decoratorGames } from "@/config/games/decorators";
+import { asyncGames } from "@/config/games/async";
+import { testingGames } from "@/config/games/testing";
 import { getRef } from "@/utils/gamesUtils";
 
 export const allGames: Game[] = [
@@ -206,6 +209,9 @@ export const allGames: Game[] = [
   ...algorithmGames.map((g) => ({ ...g, category: "Algorithms" })),
   ...recursionGames.map((g) => ({ ...g, category: "Recursion" })),
   ...metaclassGames.map((g) => ({ ...g, category: "Metaclasses" })),
+  ...decoratorGames.map((g) => ({ ...g, category: "Decorators" })),
+  ...asyncGames.map((g) => ({ ...g, category: "Async/Await" })),
+  ...testingGames.map((g) => ({ ...g, category: "Testing" })),
 ];
 
 export const games: Game[] = Object.values(allGames)
