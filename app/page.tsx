@@ -79,7 +79,9 @@ export default function Home() {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-white shadow-lg"
             >
-              <ControllerIcon className="mr-2" />
+              <span className="mr-2">
+                <ControllerIcon size={20} />
+              </span>
               Play Games
             </Button>
           </Link>

@@ -21,7 +21,9 @@ export function BlogComponent({
   const [contentType, setContentType] = useState("all");
   const [completionStatus, setCompletionStatus] = useState("all");
   const [sortBy, setSortBy] = useState("title");
-  const isContentCompleted = useProgressStore((state) => state.isContentCompleted);
+  const isContentCompleted = useProgressStore(
+    (state) => state.isContentCompleted,
+  );
 
   const filteredAndSortedContents = useMemo(() => {
     return contents
@@ -40,8 +42,10 @@ export function BlogComponent({
           (contentType === "article" && isArticle(c));
         const matchesCompletion =
           completionStatus === "all" ||
-          (completionStatus === "finished" && isContentCompleted(c.content.href)) ||
-          (completionStatus === "unfinished" && !isContentCompleted(c.content.href));
+          (completionStatus === "finished" &&
+            isContentCompleted(c.content.href)) ||
+          (completionStatus === "unfinished" &&
+            !isContentCompleted(c.content.href));
         return matchesSearch && matchesType && matchesCompletion;
       })
       .sort((a, b) => {
@@ -54,7 +58,14 @@ export function BlogComponent({
         }
         return 0;
       });
-  }, [contents, searchTerm, contentType, sortBy, completionStatus, isContentCompleted]);
+  }, [
+    contents,
+    searchTerm,
+    contentType,
+    sortBy,
+    completionStatus,
+    isContentCompleted,
+  ]);
 
   return (
     <div className="space-y-4 w-full">
@@ -97,9 +108,10 @@ export function BlogComponent({
         </div>
       )}
       <div className="max-w-full w-full gap-2 flex flex-col md:grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
-        {filteredAndSortedContents.map((c: UnifiedContent) => (
-          !isLink(c) && <UnifiedCard key={c.content.title} content={c} />
-        ))}
+        {filteredAndSortedContents.map(
+          (c: UnifiedContent) =>
+            !isLink(c) && <UnifiedCard key={c.content.title} content={c} />,
+        )}
       </div>
     </div>
   );
