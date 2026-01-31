@@ -222,7 +222,7 @@ export const games: Game[] = Object.values(allGames)
     return {
       href: game.href,
       title: game.title,
-      tags: Array.isArray(game.tags) 
+      tags: Array.isArray(game.tags)
         ? game.tags.map((tag: any) => ({
             text: tag.text || tag.constructor.name,
             href: tag.href || "",
