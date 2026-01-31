@@ -214,28 +214,30 @@ export const allGames: Game[] = [
   ...testingGames.map((g) => ({ ...g, category: "Testing" })),
 ];
 
-export const games: Game[] = Object.values(allGames)
+export const games: Game[] = allGames
   .filter((game: Game) => !game.disabled)
   .map((game: Game) => {
+    if (!game) return null;
     game.ref = game.ref < 0 ? game.ref : getRef(game);
     // Ensure all properties are serializable for static export
     return {
-      href: game.href,
-      title: game.title,
+      href: game.href || "",
+      title: game.title || "",
       tags: Array.isArray(game.tags)
         ? game.tags.map((tag: any) => ({
-            text: tag.text || tag.constructor.name,
-            href: tag.href || "",
+            text: typeof tag === "object" ? tag.text : "",
+            href: typeof tag === "object" ? tag.href : "",
           }))
         : [],
-      synopsis: game.synopsis,
-      text: game.text,
-      level: game.level,
-      ref: game.ref,
-      codeBlock: game.codeBlock,
-      extern: game.extern,
-      starred: game.starred,
-      disabled: game.disabled,
+      synopsis: game.synopsis || "",
+      text: game.text || "",
+      level: game.level || 0,
+      ref: game.ref || 0,
+      codeBlock: game.codeBlock || "",
+      extern: game.extern || false,
+      starred: game.starred || false,
+      disabled: game.disabled || false,
       category: game.category,
     } as Game;
-  });
+  })
+  .filter((game): game is Game => game !== null);
