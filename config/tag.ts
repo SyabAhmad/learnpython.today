@@ -2,56 +2,88 @@ import { Tag } from "@/types/tag";
 
 // Define knownTags with explicit type annotation
 export const knownTags: { [key: string]: Tag } = {
-    python: {
-        text: "Python",
-        href: "/tags/python/",
-    },
-    discussion: {
-        text: "Discussion",
-        href: "/tags/dicussion/",
-    },
-    path:  {
-        text: "Path",
-        href: "/tags/path",
-    },
-    resources:  {
-        text: "Resources",
-        href: "/tags/resources",
-    },
-    how_to: {
-        text: "How To",
-        href: "/tags/how_to",
-    },
-    syntax: {
-        text: "Syntax",
-        href: "/tags/syntax",
-    },
-    basics: {
-        text: "Basics",
-        href: "/tags/basic",
-    },
-    ds: {
-        text: "Data Structure",
-        href: "/tags/ds",
-    },
-    lists: {
-        text: "Lists And Array",
-        href: "/tags/lists",
-    },
-    function: {
-        text: "Function",
-        href: "/tags/function",
-    },
-    dynamicProgramming: {
-        text: "Dynamic Programming",
-        href: "/tags/dynamicProgramming",
-    },
-    algorithms : {
-        text: "Algorithms",
-        href: "/tags/algo",
-    },
-    leetcode: {
-        text: "LeetCode",
-        href: "/tags/leetcode",
-    }
+  python: {
+    text: "Python",
+    href: "/tags/python/",
+  },
+  discussion: {
+    text: "Discussion",
+    href: "/tags/dicussion/",
+  },
+  path: {
+    text: "Path",
+    href: "/tags/path",
+  },
+  resources: {
+    text: "Resources",
+    href: "/tags/resources",
+  },
+  how_to: {
+    text: "How To",
+    href: "/tags/how_to",
+  },
+  syntax: {
+    text: "Syntax",
+    href: "/tags/syntax",
+  },
+  basics: {
+    text: "Basics",
+    href: "/tags/basic",
+  },
+  ds: {
+    text: "Data Structure",
+    href: "/tags/ds",
+  },
+  lists: {
+    text: "Lists And Array",
+    href: "/tags/lists",
+  },
+  function: {
+    text: "Function",
+    href: "/tags/function",
+  },
+  dynamicProgramming: {
+    text: "Dynamic Programming",
+    href: "/tags/dynamicProgramming",
+  },
+  algorithms: {
+    text: "Algorithms",
+    href: "/tags/algo",
+  },
+  leetcode: {
+    text: "LeetCode",
+    href: "/tags/leetcode",
+  },
+  typing: {
+    text: "Typing",
+    href: "/tags/typing",
+  },
+  comprehensions: {
+    text: "Comprehensions",
+    href: "/tags/comprehensions",
+  },
+  exceptions: {
+    text: "Exceptions",
+    href: "/tags/exceptions",
+  },
+  file_io: {
+    text: "File I/O",
+    href: "/tags/file_io",
+  },
+  regex: {
+    text: "Regex",
+    href: "/tags/regex",
+  },
+  datetime: {
+    text: "DateTime",
+    href: "/tags/datetime",
+  },
+  recursion: {
+    text: "Recursion",
+    href: "/tags/recursion",
+  },
+  metaclasses: {
+    text: "Metaclasses",
+    href: "/tags/metaclasses",
+  },
 };

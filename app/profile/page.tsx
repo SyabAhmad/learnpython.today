@@ -108,8 +108,10 @@ export default function ProfilePage() {
           <User className="h-8 w-8" />
         </div>
         <div>
-          <h1 className="text-4xl font-black tracking-tight">User Profile</h1>
-          <p className="text-gray-500">
+          <h1 className="text-4xl font-black tracking-tight text-foreground">
+            User Profile
+          </h1>
+          <p className="text-muted-foreground">
             Manage your learning journey and certificates.
           </p>
         </div>
@@ -117,7 +119,7 @@ export default function ProfilePage() {
 
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
-          <Card className="border-white/10 bg-black/20 backdrop-blur-sm">
+          <Card className="border-border bg-card shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="h-5 w-5 text-emerald-500" />
@@ -134,7 +136,7 @@ export default function ProfilePage() {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-white/5 border-white/10 mt-1 focus-visible:ring-emerald-500"
+                  className="bg-accent/5 focus-visible:ring-emerald-500"
                 />
               </div>
               <div className="grid gap-2">
@@ -143,7 +145,7 @@ export default function ProfilePage() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-white/5 border-white/10 mt-1 focus-visible:ring-emerald-500"
+                  className="bg-accent/5 focus-visible:ring-emerald-500"
                 />
               </div>
               <Button
@@ -155,7 +157,7 @@ export default function ProfilePage() {
             </CardContent>
           </Card>
 
-          <Card className="border-white/10 bg-black/20 backdrop-blur-sm">
+          <Card className="border-border bg-card shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="flex flex-col space-y-1.5">
                 <CardTitle className="flex items-center gap-2">
@@ -167,7 +169,7 @@ export default function ProfilePage() {
                 variant="ghost"
                 size="sm"
                 onClick={handleReset}
-                className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-8 px-2"
+                className="text-red-500 hover:text-red-400 hover:bg-red-500/10 h-8 px-2"
                 title="Reset All Progress"
               >
                 <RefreshCw className="h-4 w-4 mr-2" />
@@ -176,19 +178,19 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-white/5 rounded-xl border border-white/10 text-center">
+                <div className="p-4 bg-accent/20 rounded-xl border border-border text-center">
                   <div className="text-3xl font-black text-emerald-500">
                     {totalScore}
                   </div>
-                  <div className="text-xs text-gray-500 uppercase font-bold mt-1">
+                  <div className="text-xs text-muted-foreground uppercase font-bold mt-1">
                     Total XP
                   </div>
                 </div>
-                <div className="p-4 bg-white/5 rounded-xl border border-white/10 text-center">
+                <div className="p-4 bg-accent/20 rounded-xl border border-border text-center">
                   <div className="text-3xl font-black text-blue-500">
                     {completedGames.length}
                   </div>
-                  <div className="text-xs text-gray-500 uppercase font-bold mt-1">
+                  <div className="text-xs text-muted-foreground uppercase font-bold mt-1">
                     Games Won
                   </div>
                 </div>
@@ -196,7 +198,7 @@ export default function ProfilePage() {
             </CardContent>
           </Card>
 
-          <Card className="border-white/10 bg-black/20 backdrop-blur-sm">
+          <Card className="border-border bg-card shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-emerald-500" />
@@ -216,28 +218,28 @@ export default function ProfilePage() {
                     return (
                       <div
                         key={game.href}
-                        className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5 group hover:border-emerald-500/30 transition-all"
+                        className="flex items-center justify-between p-3 bg-accent/10 rounded-lg border border-border group hover:border-emerald-500/30 transition-all"
                       >
                         <div className="flex items-center gap-3">
                           <div className="p-1.5 bg-emerald-500/20 rounded text-emerald-500">
                             <CheckCircle2 className="h-4 w-4" />
                           </div>
                           <div>
-                            <span className="font-medium block">
+                            <span className="font-medium block text-foreground">
                               {game.title}
                             </span>
                             {result && (
-                              <div className="text-xs text-gray-400 flex gap-2 mt-0.5">
+                              <div className="text-xs text-muted-foreground flex gap-2 mt-0.5">
                                 <span>
                                   Score:{" "}
-                                  <span className="text-emerald-400">
+                                  <span className="text-emerald-500">
                                     {result.score}
                                   </span>
                                 </span>
                                 <span>•</span>
                                 <span>
                                   Penalty:{" "}
-                                  <span className="text-red-400">
+                                  <span className="text-red-500">
                                     -{result.penalty || 0}
                                   </span>
                                 </span>
@@ -252,7 +254,7 @@ export default function ProfilePage() {
                     );
                   })
                 ) : (
-                  <div className="text-center py-8 text-gray-500 border border-dashed border-white/10 rounded-lg">
+                  <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
                     No games completed yet. Start learning!
                   </div>
                 )}
@@ -262,7 +264,7 @@ export default function ProfilePage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="border-white/10 bg-black/20 backdrop-blur-sm sticky top-24">
+          <Card className="border-border bg-card shadow-sm sticky top-24">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Award className="h-5 w-5 text-emerald-500" />
@@ -270,7 +272,7 @@ export default function ProfilePage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="aspect-[4/3] w-full bg-white rounded-lg overflow-hidden shadow-2xl relative border-8 border-emerald-500/10">
+              <div className="aspect-[4/3] w-full bg-slate-50 dark:bg-slate-900 rounded-lg overflow-hidden shadow-2xl relative border-8 border-emerald-500/10">
                 <svg
                   ref={badgeRef}
                   viewBox="0 0 800 600"

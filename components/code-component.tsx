@@ -150,7 +150,7 @@ export function CodeComponent(props: { game: Game }) {
           </span>
         </div>
       </div>
-      <div className="flex flex-col bg-[#1e1e1e] rounded-lg shadow-2xl overflow-hidden border border-white/10">
+      <div className="flex flex-col bg-[#1e1e1e] text-[#d4d4d4] rounded-lg shadow-2xl overflow-hidden border border-white/10">
         {/* Mac-style Window Title Bar */}
         <div className="flex items-center justify-between px-4 py-3 bg-[#252526] border-b border-white/5">
           <div className="flex space-x-2">
@@ -159,7 +159,7 @@ export function CodeComponent(props: { game: Game }) {
             <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
           </div>
           <div className="text-xs text-gray-400 font-medium flex items-center">
-            <span className="mr-2 text-blue-400">py</span>
+            <span className="mr-2 text-blue-400 font-bold">py</span>
             main.py — learnpython.today
           </div>
           <div className="w-12"></div> {/* Spacer for symmetry */}
@@ -168,8 +168,8 @@ export function CodeComponent(props: { game: Game }) {
         {/* Tab Bar */}
         <div className="flex bg-[#252526] px-2 h-9 items-end">
           <div className="bg-[#1e1e1e] text-gray-300 text-xs px-4 py-2 rounded-t-lg border-t border-x border-white/5 flex items-center gap-2">
-            <span className="text-blue-400">py</span>
-            main.py
+            <span className="text-blue-400 font-bold">py</span>
+            <span className="text-gray-200">main.py</span>
             <div className="w-2 h-2 rounded-full bg-gray-500/20 group-hover:bg-gray-500/40"></div>
           </div>
         </div>

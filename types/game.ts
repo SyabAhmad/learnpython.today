@@ -15,6 +15,7 @@ export interface Game {
   extern: boolean;
   starred: boolean;
   disabled: boolean;
+  category?: string;
 }
 
 /** Builder for the Game Class */
@@ -30,6 +31,7 @@ export class GameBuilder {
   private starred?: boolean;
   private disabled?: boolean;
   private ref?: number;
+  private category?: string;
 
   setTitle(title: string): GameBuilder {
     this.title = title;
@@ -76,6 +78,11 @@ export class GameBuilder {
     return this;
   }
 
+  setCategory(category: string): GameBuilder {
+    this.category = category;
+    return this;
+  }
+
   isValid(): boolean {
     return (
       this.href === undefined ||
@@ -95,7 +102,7 @@ export class GameBuilder {
   build(): Game {
     if (!this.isValid()) {
       throw new Error(
-        "Cannot build game, one or more fields are not properly initialized."
+        "Cannot build game, one or more fields are not properly initialized.",
       );
     }
     return {
@@ -109,7 +116,8 @@ export class GameBuilder {
       starred: this.starred ?? false,
       disabled: this.disabled ?? false,
       extern: this.extern ?? false,
-      ref: this.ref ?? 0
+      ref: this.ref ?? 0,
+      category: this.category,
     };
   }
 }
