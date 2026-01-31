@@ -22,7 +22,9 @@ export function ProgressArticle({ href }: { href: string }) {
 
       if (scrollableHeight > 0) {
         const newProgress = (scrollTop / scrollableHeight) * 100;
-        setProgress(Math.max(progress, Math.min(newProgress, 100)));
+        setProgress((prevProgress) =>
+          Math.max(prevProgress, Math.min(newProgress, 100))
+        );
 
         if (newProgress > 97 && !isCompleted) {
           if (!isContentCompleted(href)) {

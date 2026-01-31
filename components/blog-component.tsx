@@ -21,7 +21,7 @@ export function BlogComponent({
   const [contentType, setContentType] = useState("all");
   const [completionStatus, setCompletionStatus] = useState("all");
   const [sortBy, setSortBy] = useState("title");
-  const isContentCompleted = useProgressStore.getState().isContentCompleted;
+  const isContentCompleted = useProgressStore((state) => state.isContentCompleted);
 
   const filteredAndSortedContents = useMemo(() => {
     return contents
