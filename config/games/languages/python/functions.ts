@@ -433,7 +433,7 @@ export const functionGames: Game[] = [
     .setTitle("Function Re-definition")
     .setHref("function-redef-logic")
     .setTags([kt.basics, kt.function])
-    .setSynopsis("What happens when you name two functions the same thing?")
+    .setSynopsis("What happens when you define the same function twice?")
     .setLevel(4)
     .setDisabled(false)
     .setExtern(false)
@@ -442,36 +442,42 @@ export const functionGames: Game[] = [
         [
           new CodeLine("def action():"),
           new CodeLine("  return 'Running'"),
+          new CodeLine(""),
           new CodeLine("def action():"),
           new CodeLine("  return 'Walking'"),
-          new CodeLine("print(action()) # Expects Walking", StateEnum.NORMAL),
+          new CodeLine(""),
+          new CodeLine("result = action()"),
           new CodeLine(
-            "# Important: The second definition overwrites the first.",
+            "print(result)  # What will this print?",
+            StateEnum.NORMAL,
+          ),
+          new CodeLine(
+            "# BUG: The first function is lost! Only the second exists.",
+            StateEnum.ERROR,
+            "You found it! Python doesn't support function overloading. When you redefine a function with the same name, the first one is completely replaced.",
+          ),
+          new CodeLine(
+            "# Output will be: Walking",
             StateEnum.CORRECT,
-            "Correct! Python doesn't support method overloading like Java.",
+            "Correct! Since the second definition overwrites the first, calling action() returns 'Walking'.",
             10,
           ),
           new CodeLine(
-            "error: Duplicate Function",
+            "# Both functions run - output: RunningWalking",
             StateEnum.WRONG,
-            "Python won't throw an error; it just updates the name to the new function.",
+            "Incorrect. Functions don't merge; only the last definition is stored.",
           ),
           new CodeLine(
-            "# Both functions remain available via action_1() and action_2()",
+            "# Python throws error: Duplicate Function",
             StateEnum.WRONG,
-            "No, Python doesn't auto-rename functions; the first is simply lost.",
-          ),
-          new CodeLine(
-            "# The function behavior merges both implementations",
-            StateEnum.WRONG,
-            "Functions don't merge; the last definition completely replaces the first.",
+            "Incorrect. Python allows redefinition without errors; it just overwrites the name.",
           ),
         ],
         "python",
       ),
     )
     .setText(
-      "In Python, assigning a function name twice doesn't cause a crash—it simply overwrites the first one. Understand this behavior!",
+      "In Python, when you define two functions with the same name, the second definition completely replaces the first. The first function is lost and can no longer be called. This is different from languages like Java that support method overloading.",
     )
     .setCategory("Functions")
     .build(),
