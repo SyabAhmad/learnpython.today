@@ -1,7 +1,7 @@
 import { CH1 } from "@/components/custom-typo";
 import { BlogComponent } from "@/components/blog-component";
 import { knownTags as allTags } from "@/config/tag";
-import { games } from "@/config/games";
+import { allGames as games } from "@/config/games-multi-language";
 import { blogs } from "@/config/blogs";
 import { UnifiedContent, isGame, isArticle } from "@/types/unifiedContent";
 import Link from "next/link";

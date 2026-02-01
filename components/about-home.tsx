@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import ClientSideContent from "@/components/game-score";
-import { games } from "@/config/games";
+import { allGames as games } from "@/config/games-multi-language";
 import { blogs } from "@/config/blogs";
 import { BookOpen, Zap, Target } from "lucide-react";
 

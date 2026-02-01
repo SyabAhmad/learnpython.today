@@ -2,6 +2,7 @@ import { Tag } from "@/types/tag";
 import { CodeBlock } from "./codeBlock";
 import { replacer } from "@/utils/codeComponentUtils";
 import { knownTags as kt } from "@/config/tag";
+import { Language, GameMechanic, BackendService } from "./codeLine";
 
 export interface Game {
   href: string;
@@ -16,6 +17,11 @@ export interface Game {
   starred: boolean;
   disabled: boolean;
   category?: string;
+  language?: Language | string;
+  mechanic?: GameMechanic;
+  backendService?: BackendService;
+  subcategory?: string;
+  relatedGames?: string[];
 }
 
 /** Builder for the Game Class */
@@ -83,6 +89,37 @@ export class GameBuilder {
     return this;
   }
 
+  private language?: Language | string;
+  private mechanic?: GameMechanic;
+  private backendService?: BackendService;
+  private subcategory?: string;
+  private relatedGames?: string[];
+
+  setLanguage(language: Language | string): GameBuilder {
+    this.language = language;
+    return this;
+  }
+
+  setMechanic(mechanic: GameMechanic): GameBuilder {
+    this.mechanic = mechanic;
+    return this;
+  }
+
+  setBackendService(backendService: BackendService): GameBuilder {
+    this.backendService = backendService;
+    return this;
+  }
+
+  setSubcategory(subcategory: string): GameBuilder {
+    this.subcategory = subcategory;
+    return this;
+  }
+
+  setRelatedGames(relatedGames: string[]): GameBuilder {
+    this.relatedGames = relatedGames;
+    return this;
+  }
+
   isValid(): boolean {
     return (
       this.href === undefined ||
@@ -118,6 +155,11 @@ export class GameBuilder {
       extern: this.extern ?? false,
       ref: this.ref ?? 0,
       category: this.category,
+      language: this.language ?? Language.PYTHON,
+      mechanic: this.mechanic ?? GameMechanic.BUG_FINDING,
+      backendService: this.backendService,
+      subcategory: this.subcategory,
+      relatedGames: this.relatedGames,
     };
   }
 }

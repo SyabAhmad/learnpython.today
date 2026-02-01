@@ -1,30 +1,47 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { UnifiedContent, isGame, isArticle } from "@/types/unifiedContent";
+import { Language } from "@/types/codeLine";
 
 export interface GameResult {
   href: string;
   score: number;
   penalty: number;
   timestamp: number;
+  language?: Language | string;
+}
+
+export interface LanguageProgress {
+  totalGames: number;
+  completedGames: number;
+  totalScore: number;
+  lastPlayed?: number;
 }
 
 interface ProgressState {
   completedGames: string[];
   gameResults: GameResult[];
   completedArticles: string[];
+  languageProgress: Record<string, LanguageProgress>;
   currentContent: string | null;
   totalScore: number;
   userName: string;
   userEmail: string;
-  completeGame: (href: string, score?: number, penalty?: number) => void;
+  completeGame: (
+    href: string,
+    score?: number,
+    penalty?: number,
+    language?: Language | string,
+  ) => void;
   completeArticle: (href: string) => void;
   setUserInfo: (name: string, email: string) => void;
   setCurrentContent: (href: string | null) => void;
   isContentCompleted: (href: string) => boolean;
   getNextContent: (allContent: UnifiedContent[]) => UnifiedContent | null;
   getCompletedCounts: () => { games: number; articles: number };
+  getLanguageProgress: (language: Language | string) => LanguageProgress | null;
   resetProgress: () => void;
+  resetLanguageProgress: (language: Language | string) => void;
 }
 
 export const useProgressStore = create<ProgressState>()(
@@ -33,11 +50,12 @@ export const useProgressStore = create<ProgressState>()(
       completedGames: [],
       gameResults: [],
       completedArticles: [],
+      languageProgress: {},
       currentContent: null,
       totalScore: 0,
       userName: "Python Learner",
       userEmail: "",
-      completeGame: (href, score = 0, penalty = 0) =>
+      completeGame: (href, score = 0, penalty = 0, language) =>
         set((state) => {
           const isAlreadyCompleted = (state.completedGames || []).includes(
             href,
@@ -52,6 +70,26 @@ export const useProgressStore = create<ProgressState>()(
             score: Number(score) || 0,
             penalty: Number(penalty) || 0,
             timestamp: Date.now(),
+            language,
+          };
+
+          // Update language progress
+          const langKey = language?.toString() || "python";
+          const currentLangProgress = state.languageProgress[langKey] || {
+            totalGames: 0,
+            completedGames: 0,
+            totalScore: 0,
+          };
+
+          const updatedLanguageProgress = {
+            ...state.languageProgress,
+            [langKey]: {
+              ...currentLangProgress,
+              completedGames: currentLangProgress.completedGames + 1,
+              totalScore:
+                (currentLangProgress.totalScore || 0) + (Number(score) || 0),
+              lastPlayed: Date.now(),
+            },
           };
 
           return {
@@ -59,6 +97,7 @@ export const useProgressStore = create<ProgressState>()(
             completedGames: [...(state.completedGames || []), href],
             gameResults: [...(state.gameResults || []), newResult],
             totalScore: newTotal,
+            languageProgress: updatedLanguageProgress,
           };
         }),
       completeArticle: (href) =>
@@ -88,12 +127,25 @@ export const useProgressStore = create<ProgressState>()(
           articles: state.completedArticles.length,
         };
       },
+      getLanguageProgress: (language) => {
+        const state = get();
+        const langKey = language.toString();
+        return state.languageProgress[langKey] || null;
+      },
       resetProgress: () =>
         set({
           completedGames: [],
           gameResults: [],
           completedArticles: [],
+          languageProgress: {},
           totalScore: 0,
+        }),
+      resetLanguageProgress: (language) =>
+        set((state) => {
+          const langKey = language.toString();
+          const updatedProgress = { ...state.languageProgress };
+          delete updatedProgress[langKey];
+          return { languageProgress: updatedProgress };
         }),
     }),
     {

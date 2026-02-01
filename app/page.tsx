@@ -7,7 +7,7 @@ import { CH1, SubTitle } from "@/components/custom-typo";
 import ControllerIcon from "@/components/ui/controller-icon";
 import { Button } from "@/components/ui/button";
 import { UnifiedContent } from "@/types/unifiedContent";
-import { games } from "@/config/games";
+import { allGames as games } from "@/config/games-multi-language";
 import { ArrowRight, Zap, BookOpen, Code2 } from "lucide-react";
 import Link from "next/link";
 

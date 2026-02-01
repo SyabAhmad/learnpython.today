@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Game } from "@/types/game";
-import { games } from "@/config/games";
+import { allGames } from "@/config/games-multi-language";
 import { CH1, GameDesc } from "@/components/custom-typo";
 import { GameLevel } from "@/components/game-level-component";
 import { CodeComponent } from "@/components/code-component";
@@ -16,12 +16,14 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { LanguageBadgeComponent } from "@/components/language-badge";
+import { getLanguageDisplayName } from "@/utils/multiLanguageGamesUtils";
 
 function GameHeader({ game }: { game: Game }) {
   return (
     <div className="flex flex-col gap-6 mb-8">
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+      <nav className="flex items-center gap-2 text-sm text-muted-foreground flex-wrap">
         <Link
           href="/games"
           className="flex items-center gap-1 hover:text-emerald-500 transition-colors"
@@ -29,6 +31,10 @@ function GameHeader({ game }: { game: Game }) {
           <ChevronLeft className="h-4 w-4" />
           Back to Challenges
         </Link>
+        <span>/</span>
+        <span className="text-foreground font-medium">
+          {getLanguageDisplayName(game.language || "python")}
+        </span>
         <span>/</span>
         <span className="text-foreground font-medium">{game.category}</span>
       </nav>
@@ -41,9 +47,13 @@ function GameHeader({ game }: { game: Game }) {
             </h1>
             <GameCompletionBadge href={game.href} />
           </div>
-          <div className="flex items-center gap-4 pt-1">
+          <div className="flex items-center gap-4 pt-1 flex-wrap">
             <div className="flex items-center gap-2">
               <GameLevel level={game.level} />
+            </div>
+            <div className="h-4 w-px bg-border invisible md:visible" />
+            <div className="flex items-center gap-2 text-sm text-muted-foreground uppercase font-bold tracking-wider">
+              <LanguageBadgeComponent game={game} showText={true} />
             </div>
             <div className="h-4 w-px bg-border invisible md:visible" />
             <div className="flex items-center gap-2 text-sm text-muted-foreground uppercase font-bold tracking-wider">
@@ -128,7 +138,7 @@ function GameContent({ game }: { game: Game }) {
 }
 
 export default function GamePrompt({ params }: { params: { slug: string } }) {
-  const game = games.find((game) => game.href === params.slug);
+  const game = allGames.find((game) => game.href === params.slug);
 
   if (!game) {
     return <h1>404 - Page Not Found</h1>;
@@ -161,7 +171,9 @@ export default function GamePrompt({ params }: { params: { slug: string } }) {
 }
 
 export async function generateStaticParams() {
-  return games.map((game: Game) => ({
-    slug: game.href,
-  }));
+  return allGames
+    .filter((game: Game) => game.href && game.text) // Filter out any games with missing required fields
+    .map((game: Game) => ({
+      slug: game.href,
+    }));
 }

@@ -10,7 +10,7 @@ export const leetcodeGames: Game[] = [
     .setTags([kt.arrays, kt.algorithms])
     .setSynopsis("Find two numbers in an array that add up to a target.")
     .setLevel(3)
-    .setDisabled(false)
+    .setDisabled(true)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(
@@ -80,7 +80,7 @@ export const leetcodeGames: Game[] = [
       "Find the length of the longest substring without repeating characters."
     )
     .setLevel(4)
-    .setDisabled(false)
+    .setDisabled(true)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(
@@ -148,7 +148,7 @@ export const leetcodeGames: Game[] = [
     .setTags([kt.arrays, kt.dynamicProgramming])
     .setSynopsis("Find the contiguous subarray with the largest sum.")
     .setLevel(3)
-    .setDisabled(false)
+    .setDisabled(true)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(
@@ -212,7 +212,7 @@ export const leetcodeGames: Game[] = [
       "Determine if the input string has valid parentheses ordering."
     )
     .setLevel(2)
-    .setDisabled(false)
+    .setDisabled(true)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(
@@ -276,7 +276,7 @@ export const leetcodeGames: Game[] = [
       "Calculate the number of ways to climb n stairs, taking 1 or 2 steps at a time."
     )
     .setLevel(2)
-    .setDisabled(false)
+    .setDisabled(true)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(
@@ -334,7 +334,7 @@ export const leetcodeGames: Game[] = [
       "Find the maximum profit from buying and selling a stock once."
     )
     .setLevel(2)
-    .setDisabled(false)
+    .setDisabled(true)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(

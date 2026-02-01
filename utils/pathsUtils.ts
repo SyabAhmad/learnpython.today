@@ -2,7 +2,7 @@ import { Article } from "@/types/article";
 import { Game } from "@/types/game";
 import { UnifiedContent } from "@/types/unifiedContent";
 import { blogs } from "@/config/blogs";
-import { games } from "@/config/games";
+import { allGames as games } from "@/config/games-multi-language";
 
 export type ContentReference =
   | { type: "game"; href: string }

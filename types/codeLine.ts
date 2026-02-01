@@ -1,4 +1,4 @@
-// Wheter the line is OK, Problematic, A correct answer or a wrong one.
+// Whether the line is OK, Problematic, A correct answer or a wrong one.
 export enum StateEnum {
   NORMAL = 0,
   ERROR = 1,
@@ -6,12 +6,42 @@ export enum StateEnum {
   WRONG = 3,
 }
 
+// Supported programming languages
+export enum Language {
+  PYTHON = "python",
+  SQL = "sql",
+  HTML = "html",
+  CSS = "css",
+  JAVASCRIPT = "javascript",
+  GO = "go",
+}
+
+// Supported backend/execution services
+export enum BackendService {
+  PYTHON = "python",
+  FLASK = "flask",
+  NUMPY = "numpy",
+  MATPLOTLIB = "matplotlib",
+  SQLITE = "sqlite",
+  NODEJS = "nodejs",
+  GO_RUNTIME = "go_runtime",
+}
+
+// Game mechanics/types
+export enum GameMechanic {
+  BUG_FINDING = "bug_finding",
+  CODE_EXECUTION = "code_execution",
+  MULTI_FILE = "multi_file",
+  QUERY_OPTIMIZATION = "query_optimization",
+  MARKUP_VALIDATION = "markup_validation",
+}
+
 // Class for a line (or logic group) of code in the codeblock
 export class CodeLine {
   content: string;
-  state : StateEnum;
-  hint : string;
-  score : number;
+  state: StateEnum;
+  hint: string;
+  score: number;
 
   constructor(
     content: string,
@@ -24,7 +54,7 @@ export class CodeLine {
     this.hint = hint;
     this.score = score;
     if (this.score == 0 && this.state == StateEnum.CORRECT) {
-        this.score = 10;
+      this.score = 10;
     }
   }
 }

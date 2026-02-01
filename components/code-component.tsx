@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { games } from "@/config/games";
+import { allGames } from "@/config/games-multi-language";
 import { CodeBlock } from "@/types/codeBlock";
 import { CodeLine, StateEnum } from "@/types/codeLine";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -103,20 +103,25 @@ export function CodeComponent(props: { game: Game }) {
     if (cl.state == StateEnum.CORRECT) {
       const finalLineScore = Math.max(0, cl.score - penalty);
       setScore(score + finalLineScore);
-      completeGame(props.game.href, finalLineScore, penalty);
+      completeGame(
+        props.game.href,
+        finalLineScore,
+        penalty,
+        props.game.language,
+      );
       setIsSuccessOpen(true);
       // Next game in time or last created.
       setTimeout(
         () =>
           setNextHref(
             // Try the next one first.
-            games.filter((g) => g.ref == props.game.ref + 1)[0]?.href ||
+            allGames.filter((g) => g.ref == props.game.ref + 1)[0]?.href ||
               // Default to another of higher score if possible
-              games
+              allGames
                 .sort(sortGamesByRef)
                 .filter((game) => game.ref < props.game.ref)[0]?.href ||
               // Go back to first one if nothing else.
-              games[0].href,
+              allGames[0].href,
           ),
         100,
       );

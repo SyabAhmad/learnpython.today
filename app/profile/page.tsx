@@ -2,7 +2,7 @@
 
 import { useProgressStore } from "@/stores/progress-store";
 import { useState, useEffect, useRef } from "react";
-import { games } from "@/config/games";
+import { allGames as games } from "@/config/games-multi-language";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
