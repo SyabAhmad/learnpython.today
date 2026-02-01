@@ -333,12 +333,7 @@ export const sqlBasicsGames = [
           new CodeLine(
             "LIMIT 5",
             StateEnum.ERROR,
-            "Wrong order: LIMIT should come after WHERE/ORDER BY",
-          ),
-          new CodeLine(
-            "ORDER BY price DESC",
-            StateEnum.ERROR,
-            "Wrong order: ORDER BY should come before LIMIT",
+            "Wrong: LIMIT alone at the start is incomplete",
           ),
           new CodeLine(
             "ORDER BY price DESC LIMIT 5",
@@ -354,7 +349,12 @@ export const sqlBasicsGames = [
           new CodeLine(
             "SELECT * FROM products LIMIT 5",
             StateEnum.WRONG,
-            "Need WHERE/ORDER BY before LIMIT",
+            "Missing ORDER BY clause",
+          ),
+          new CodeLine(
+            "SELECT * FROM products ORDER BY LIMIT 5",
+            StateEnum.WRONG,
+            "Syntax error: ORDER BY needs a column",
           ),
         ],
         Language.SQL,
@@ -509,6 +509,11 @@ export const sqlBasicsGames = [
         [
           new CodeLine("SELECT * FROM employees", StateEnum.NORMAL),
           new CodeLine(
+            "WHERE age > 25 OR salary > 50000",
+            StateEnum.ERROR,
+            "Missing AND operator - conditions should be combined with AND",
+          ),
+          new CodeLine(
             "WHERE age > 25 AND salary > 50000",
             StateEnum.CORRECT,
             "Correct: AND operator matches all conditions",
@@ -520,14 +525,14 @@ export const sqlBasicsGames = [
             "SQL uses AND, not && (that's for programming)",
           ),
           new CodeLine(
-            "WHERE age > 25 OR salary > 50000",
-            StateEnum.WRONG,
-            "OR matches any condition, AND requires all",
-          ),
-          new CodeLine(
             "WHERE (age > 25) (salary > 50000)",
             StateEnum.WRONG,
             "Missing AND operator between conditions",
+          ),
+          new CodeLine(
+            "WHERE age > 25, salary > 50000",
+            StateEnum.WRONG,
+            "Can't use comma, must use AND or OR",
           ),
         ],
         Language.SQL,
@@ -553,6 +558,11 @@ export const sqlBasicsGames = [
         [
           new CodeLine("SELECT * FROM orders", StateEnum.NORMAL),
           new CodeLine(
+            "WHERE status = 'pending' AND status = 'processing'",
+            StateEnum.ERROR,
+            "Wrong: AND requires both conditions (impossible for one field)",
+          ),
+          new CodeLine(
             "WHERE status = 'pending' OR status = 'processing'",
             StateEnum.CORRECT,
             "Correct: OR matches any condition",
@@ -564,14 +574,14 @@ export const sqlBasicsGames = [
             "SQL uses OR, not single pipe |",
           ),
           new CodeLine(
-            "WHERE status = 'pending' AND status = 'processing'",
-            StateEnum.WRONG,
-            "AND requires both - impossible here, need OR",
-          ),
-          new CodeLine(
             "WHERE status || = 'pending' OR status = 'processing'",
             StateEnum.WRONG,
             "Invalid syntax, || is for string concatenation",
+          ),
+          new CodeLine(
+            "WHERE status IN ('pending', 'processing')",
+            StateEnum.WRONG,
+            "Valid but not the OR syntax we're looking for",
           ),
         ],
         Language.SQL,
@@ -596,6 +606,11 @@ export const sqlBasicsGames = [
       new CodeBlock(
         [
           new CodeLine("SELECT * FROM products", StateEnum.NORMAL),
+          new CodeLine(
+            "WHERE NOT NOT category = 'electronics'",
+            StateEnum.ERROR,
+            "Double NOT is wrong - use single NOT or use !=",
+          ),
           new CodeLine(
             "WHERE NOT category = 'electronics'",
             StateEnum.CORRECT,
@@ -816,8 +831,30 @@ export const sqlBasicsGames = [
       new CodeBlock(
         [
           new CodeLine(
+            "SELECT AVG(sallary) as average_salary",
+            StateEnum.ERROR,
+            "Typo: Should be 'salary' not 'sallary'",
+          ),
+          new CodeLine(
             "SELECT AVG(salary) as average_salary",
-            StateEnum.NORMAL,
+            StateEnum.CORRECT,
+            "Correct: AVG() function with correct column name",
+            10,
+          ),
+          new CodeLine(
+            "SELECT AVERAGE(salary) as average_salary",
+            StateEnum.WRONG,
+            "SQL uses AVG, not AVERAGE",
+          ),
+          new CodeLine(
+            "SELECT salary / COUNT(*) as average_salary",
+            StateEnum.WRONG,
+            "Manual calculation is complex, use AVG function",
+          ),
+          new CodeLine(
+            "SELECT AVG * salary as average_salary",
+            StateEnum.WRONG,
+            "AVG is a function, must have parentheses with column",
           ),
           new CodeLine("FROM employees", StateEnum.NORMAL),
         ],
@@ -843,8 +880,30 @@ export const sqlBasicsGames = [
       new CodeBlock(
         [
           new CodeLine(
+            "SELECT MIN(price), MAX(price)",
+            StateEnum.ERROR,
+            "Missing aliases - use 'as lowest' and 'as highest'",
+          ),
+          new CodeLine(
             "SELECT MIN(price) as lowest, MAX(price) as highest",
-            StateEnum.NORMAL,
+            StateEnum.CORRECT,
+            "Correct: MIN() and MAX() with meaningful aliases",
+            10,
+          ),
+          new CodeLine(
+            "SELECT MINIMUM(price) as lowest, MAXIMUM(price) as highest",
+            StateEnum.WRONG,
+            "SQL uses MIN/MAX, not MINIMUM/MAXIMUM",
+          ),
+          new CodeLine(
+            "SELECT MIN(price), MAX(price) as highest",
+            StateEnum.WRONG,
+            "Both functions should have aliases for clarity",
+          ),
+          new CodeLine(
+            "SELECT price MIN as lowest, price MAX as highest",
+            StateEnum.WRONG,
+            "MIN and MAX are functions - use parentheses",
           ),
           new CodeLine("FROM products", StateEnum.NORMAL),
         ],

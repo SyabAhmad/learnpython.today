@@ -20,13 +20,37 @@ export const pythonNumpyGames = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("import numpy as np", StateEnum.NORMAL),
+          new CodeLine(
+            "import numpy as np",
+            StateEnum.NORMAL,
+            "Standard NumPy import",
+          ),
           new CodeLine(
             "arr = np.array([1, 2, 3]",
             StateEnum.ERROR,
-            "Missing closing bracket",
+            "Missing closing bracket - arrays need matching brackets",
           ),
-          new CodeLine("print(arr.shape)", StateEnum.NORMAL),
+          new CodeLine(
+            "arr = np.array([1, 2, 3])",
+            StateEnum.CORRECT,
+            "Correct! The closing bracket completes the array definition.",
+            15,
+          ),
+          new CodeLine(
+            "arr = [1, 2, 3]",
+            StateEnum.WRONG,
+            "This is a regular Python list, not a NumPy array. We need np.array() for efficiency.",
+          ),
+          new CodeLine(
+            "arr = np.list([1, 2, 3])",
+            StateEnum.WRONG,
+            "np.list() doesn't exist. Use np.array() instead.",
+          ),
+          new CodeLine(
+            "print(arr.shape)",
+            StateEnum.NORMAL,
+            "Prints the shape/dimensions of the array",
+          ),
         ],
         Language.PYTHON,
         "(3,)",

@@ -17,7 +17,11 @@ export const basicGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("x = 10", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "x = 10",
+            StateEnum.NORMAL,
+            "Variable initialization with assignment operator",
+          ),
           new CodeLine(
             "y == 20",
             StateEnum.ERROR,
@@ -34,7 +38,11 @@ export const basicGames: Game[] = [
             StateEnum.WRONG,
             "Missing '=' in the variable declaration.",
           ),
-          new CodeLine("c = 'World'", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "c = 'World'",
+            StateEnum.NORMAL,
+            "String variable declaration",
+          ),
         ],
         "python",
       ),
@@ -255,8 +263,16 @@ export const basicGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("my_list = []", StateEnum.NORMAL, ""),
-          new CodeLine("for i in range(5):", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "my_list = []",
+            StateEnum.NORMAL,
+            "Initialize empty list",
+          ),
+          new CodeLine(
+            "for i in range(5):",
+            StateEnum.NORMAL,
+            "Loop from 0 to 4",
+          ),
           new CodeLine(
             "  my_list(append(i))",
             StateEnum.ERROR,
@@ -282,7 +298,11 @@ export const basicGames: Game[] = [
             StateEnum.WRONG,
             "This won't work. [i] would have been correct.",
           ),
-          new CodeLine("return my_list", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "return my_list",
+            StateEnum.NORMAL,
+            "Return the populated list",
+          ),
         ],
         "python",
       ),

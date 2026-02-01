@@ -29,9 +29,8 @@ export const collectionGames: Game[] = [
           ),
           new CodeLine(
             "counts = defaultdict(lambda: 0)",
-            StateEnum.CORRECT,
-            "This also works! Using a lambda to return the initial value is valid.",
-            10,
+            StateEnum.WRONG,
+            "While this is valid Python, it's overcomplicating things. Using 'int' is the standard approach for defaultdict.",
           ),
           new CodeLine(
             "counts = defaultdict(None)",

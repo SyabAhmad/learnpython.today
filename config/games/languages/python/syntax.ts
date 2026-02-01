@@ -73,27 +73,35 @@ export const syntaxGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("from typing import List, Tuple", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "from typing import List, Tuple",
+            StateEnum.NORMAL,
+            "Import typing annotations",
+          ),
           new CodeLine(
             "def calculate_total(items: List[Tuple[str, float, int]], tax_rate: float) -> float:",
             StateEnum.NORMAL,
-            "",
+            "Function definition with type hints",
           ),
-          new CodeLine("    total: float = 0.0", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "    total: float = 0.0",
+            StateEnum.NORMAL,
+            "Initialize total variable",
+          ),
           new CodeLine(
             "    for item_name, price, quantity in items:",
             StateEnum.NORMAL,
-            "",
+            "Loop through items tuple",
           ),
           new CodeLine(
             "        total += price * quantity",
             StateEnum.NORMAL,
-            "",
+            "Accumulate total cost",
           ),
           new CodeLine(
             "    # Now we need to return the total",
             StateEnum.NORMAL,
-            "",
+            "Comment indicating return statement needed",
           ),
           new CodeLine(
             "    return",

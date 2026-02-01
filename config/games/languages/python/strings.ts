@@ -20,23 +20,39 @@ export const stringGames: Game[] = [
           new CodeLine(
             "def format_user_info(name, age, city):",
             StateEnum.NORMAL,
-            "",
+            "Function definition",
           ),
-          new CodeLine("    # Format user information", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "    # Format user information",
+            StateEnum.NORMAL,
+            "Comment",
+          ),
           new CodeLine(
             "    user_info = 'Name: %s, Age: %d, City: %s' % (name, age, city)",
             StateEnum.NORMAL,
-            "",
+            "Using % formatting method",
           ),
-          new CodeLine("    print(user_info)", StateEnum.NORMAL, ""),
-          new CodeLine("    # Using f-string", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "    print(user_info)",
+            StateEnum.NORMAL,
+            "Print result",
+          ),
+          new CodeLine("    # Using f-string", StateEnum.NORMAL, "Comment"),
           new CodeLine(
             "    user_info = f'Name: {name}, Age: {age}, City: {city}'",
             StateEnum.NORMAL,
-            "",
+            "Using f-string method",
           ),
-          new CodeLine("    print(user_info)", StateEnum.NORMAL, ""),
-          new CodeLine("    # Attempt to use .format()", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "    print(user_info)",
+            StateEnum.NORMAL,
+            "Print result",
+          ),
+          new CodeLine(
+            "    # Attempt to use .format()",
+            StateEnum.NORMAL,
+            "Comment",
+          ),
           new CodeLine(
             "    user_info = 'Name: {0}, Age: {1}, City: {2}'.format{name, age, city}",
             StateEnum.ERROR,
@@ -63,8 +79,12 @@ export const stringGames: Game[] = [
             StateEnum.WRONG,
             "Incorrect use of parentheses instead of curly braces for placeholders",
           ),
-          new CodeLine("    print(user_info)", StateEnum.NORMAL, ""),
-          new CodeLine("# Test the function", StateEnum.NORMAL, ""),
+          new CodeLine(
+            "    print(user_info)",
+            StateEnum.NORMAL,
+            "Print result",
+          ),
+          new CodeLine("# Test the function", StateEnum.NORMAL, "Comment"),
           new CodeLine(
             "format_user_info('Alice', 30, 'New York')",
             StateEnum.NORMAL,
