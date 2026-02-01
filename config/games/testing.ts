@@ -288,75 +288,93 @@ export const testingGames: Game[] = [
     .setHref("test-coverage-1")
     .setTags([kt.python])
     .setSynopsis("Measuring test coverage")
-    .setText("Which tool measures code coverage?")
     .setLevel(3)
+    .setDisabled(false)
+    .setExtern(false)
+    .setText(
+      "Which command correctly installs and runs code coverage analysis?",
+    )
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("# Install coverage"),
+          new CodeLine("# To measure code coverage, you need to:"),
+          new CodeLine(""),
           new CodeLine(
-            "# pip install coverage",
+            "pip install coverage",
             StateEnum.CORRECT,
-            "Correct! Coverage.py is the standard",
+            "Correct! 'coverage' is the standard Python package for measuring code coverage.",
             10,
           ),
           new CodeLine(
-            "# pip install pytest-coverage",
+            "pip install pytest-coverage",
             StateEnum.WRONG,
-            "Wrong package name - use coverage",
+            "Wrong package name. Use 'coverage' package, not 'pytest-coverage'.",
           ),
           new CodeLine(
-            "# pip install codecov",
+            "pip install codecov",
             StateEnum.WRONG,
-            "codecov is for CI/CD, not local coverage",
+            "Incorrect. 'codecov' is a CI/CD service for tracking coverage, not the tool itself.",
           ),
-          new CodeLine("# coverage run -m pytest"),
-          new CodeLine("# coverage report"),
+          new CodeLine(
+            "pip install code-coverage",
+            StateEnum.WRONG,
+            "Incorrect. The correct package name is 'coverage' with no hyphen.",
+          ),
+          new CodeLine("# Then run: coverage run -m pytest"),
+          new CodeLine("# Generate report: coverage report"),
         ],
         "python",
       ),
     )
+    .setCategory("Testing")
     .build(),
   new GameBuilder()
     .setTitle("Assertion Error Messages")
     .setHref("assertion-error-messages-1")
     .setTags([kt.python])
     .setSynopsis("Adding custom assertion messages")
-    .setText("Identify correct assertion with message")
     .setLevel(2)
+    .setDisabled(false)
+    .setExtern(false)
+    .setText(
+      "When writing assertions, you can add custom error messages. Identify the correct syntax.",
+    )
     .setCodeBlock(
       new CodeBlock(
         [
+          new CodeLine("a, b = 5, 10"),
+          new CodeLine("# Which assertion with message is correct?"),
+          new CodeLine(""),
           new CodeLine(
             "self.assertEqual(a, b, message='Numbers should match')",
             StateEnum.ERROR,
-            "Wrong parameter name - use 'msg' not 'message'.",
-          ),
-          new CodeLine(
-            "self.assertEqual(a, b, 'Numbers should match')",
-            StateEnum.CORRECT,
-            "Correct! Positional argument works.",
-            10,
+            "Incorrect parameter name. The parameter is 'msg', not 'message'.",
           ),
           new CodeLine(
             "self.assertEqual(a, b, msg='Numbers should match')",
             StateEnum.CORRECT,
-            "Also correct! Keyword argument is explicit.",
+            "Correct! Use the keyword argument 'msg' to add a custom error message.",
             10,
+          ),
+          new CodeLine(
+            "self.assertEqual(a, b, 'Numbers should match')",
+            StateEnum.WRONG,
+            "While this works as a positional argument, using 'msg=' is more explicit and readable.",
           ),
           new CodeLine(
             "self.assertEqual(a, b, error='Numbers should match')",
             StateEnum.WRONG,
-            "Wrong parameter name - it's 'msg' not 'error'.",
+            "Wrong parameter name - there is no 'error' parameter in assertEqual.",
           ),
           new CodeLine(
             "self.assertEqual(a, b): 'Numbers should match'",
             StateEnum.WRONG,
-            "Invalid syntax - can't use colon outside function definition.",
+            "Invalid syntax - you can't use a colon outside a function definition.",
           ),
         ],
         "python",
       ),
     )
+    .setCategory("Testing")
     .build(),
 ];

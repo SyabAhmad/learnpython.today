@@ -150,34 +150,38 @@ export const comprehensionGames: Game[] = [
       new CodeBlock(
         [
           new CodeLine("word = 'mississippi'"),
-          new CodeLine("unique = [char for char in word]", StateEnum.NORMAL),
           new CodeLine(
-            "unique_set = {char for char in word}",
-            StateEnum.CORRECT,
-            "Exactly! Set comprehensions use curly braces and automatically handle uniqueness.",
-            10,
+            "# Create a set of unique characters:",
+            StateEnum.NORMAL,
+          ),
+          new CodeLine(""),
+          new CodeLine(
+            "unique_set = [char for char in word]",
+            StateEnum.WRONG,
+            "This creates a list with duplicates, not a set of unique items.",
           ),
           new CodeLine(
             "unique_set = set[char for char in word]",
             StateEnum.ERROR,
-            "You cannot use square brackets directly with the 'set' type like this.",
+            "Syntax error! You cannot use square brackets directly with 'set' type.",
+          ),
+          new CodeLine(
+            "unique_set = {char for char in word}",
+            StateEnum.CORRECT,
+            "Perfect! Set comprehensions use curly braces {} and automatically remove duplicates!",
+            10,
           ),
           new CodeLine(
             "unique_set = set(char for char in word)",
             StateEnum.WRONG,
-            "This works but is less efficient than set comprehension syntax.",
-          ),
-          new CodeLine(
-            "unique_set = [char for char in word]",
-            StateEnum.WRONG,
-            "This creates a list, not a set, and won't remove duplicates.",
+            "This works but is less efficient than using set comprehension syntax directly.",
           ),
         ],
         "python",
       ),
     )
     .setText(
-      "A set comprehension is the fastest way to create a collection of unique items. Can you identify the correct set comprehension syntax?",
+      "A set comprehension is the fastest and most Pythonic way to create a collection of unique items from an iterable. Use curly braces {} to create a set comprehension that automatically handles uniqueness.",
     )
     .setCategory("Comprehensions")
     .build(),

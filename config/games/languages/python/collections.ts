@@ -173,9 +173,8 @@ export const collectionGames: Game[] = [
           ),
           new CodeLine(
             "print(p[0])",
-            StateEnum.CORRECT,
-            "Correct! It's still a tuple, so integer indexing works.",
-            5,
+            StateEnum.WRONG,
+            "While this works, it accesses by index not by name. The question asks for the named access.",
           ),
           new CodeLine(
             "print(p['x'])",

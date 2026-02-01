@@ -107,48 +107,51 @@ export const generatorGames: Game[] = [
     .setTitle("The StopIteration Error")
     .setHref("gen-stop-iteration")
     .setTags([kt.basics, kt.exceptions])
-    .setSynopsis("What happens when an iterator is empty?")
+    .setSynopsis("What happens when you exhaust an iterator?")
     .setLevel(3)
     .setDisabled(false)
     .setExtern(false)
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("it = iter([1])"),
-          new CodeLine("next(it) # returns 1"),
-          new CodeLine("next(it) # What happens here?"),
+          new CodeLine("it = iter([1, 2, 3])"),
+          new CodeLine("next(it)  # returns 1"),
+          new CodeLine("next(it)  # returns 2"),
+          new CodeLine("next(it)  # returns 3"),
+          new CodeLine("next(it)  # What happens here?"),
+          new CodeLine(""),
+          new CodeLine(
+            "return None",
+            StateEnum.ERROR,
+            "Incorrect. Calling next() on an exhausted iterator raises an exception, not returns None.",
+          ),
           new CodeLine(
             "raise StopIteration",
             StateEnum.CORRECT,
-            "Correct! Python raises 'StopIteration' when there are no more items.",
+            "Correct! Python automatically raises StopIteration when the iterator is exhausted. This signals the end of iteration.",
             15,
           ),
           new CodeLine(
             "raise EndOfIterator",
             StateEnum.WRONG,
-            "No such exception in standard library.",
+            "No such exception exists in Python's standard library.",
           ),
           new CodeLine(
             "raise GeneratorExit",
             StateEnum.WRONG,
-            "This is only for closing generators.",
+            "GeneratorExit is only raised when explicitly closing a generator with close().",
           ),
           new CodeLine(
-            "return None",
-            StateEnum.ERROR,
-            "Calling next() on an empty iterator raises an exception, it doesn't return None.",
-          ),
-          new CodeLine(
-            "raise StopProcessing",
+            "pass  # Nothing happens",
             StateEnum.WRONG,
-            "Custom names don't work here.",
+            "Incorrect. Something DOES happen - an exception is raised.",
           ),
         ],
         "python",
       ),
     )
     .setText(
-      "Which exception is raised automatically when an iterator has no more values to yield?",
+      "When an iterator runs out of items, Python doesn't silently return None. Instead, it raises a specific exception that tells the for-loop to stop. Identify which exception is raised.",
     )
     .setCategory("Generators & Iterators")
     .build(),
@@ -164,31 +167,33 @@ export const generatorGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
+          new CodeLine("# Create a memory-efficient generator"),
+          new CodeLine("nums = range(1000)"),
           new CodeLine(
-            "gen = [x * 2 for x in range(1000)]",
-            StateEnum.NORMAL,
-            "This creates a full list in memory.",
+            "gen = [x * 2 for x in nums]",
+            StateEnum.ERROR,
+            "Error found! Square brackets create a full list. We need a generator instead.",
           ),
           new CodeLine(
-            "gen = (x * 2 for x in range(1000))",
+            "gen = (x * 2 for x in nums)",
             StateEnum.CORRECT,
-            "Correct! Parentheses create a generator expression.",
+            "Correct! Parentheses create a generator expression that yields values on demand.",
             15,
           ),
           new CodeLine(
-            "gen = <x * 2 for x in range(1000)>",
-            StateEnum.ERROR,
-            "Incorrect syntax for a generator expression.",
+            "gen = {x * 2 for x in nums}",
+            StateEnum.WRONG,
+            "Curly braces create a set comprehension, which still loads everything into memory.",
           ),
           new CodeLine(
-            "gen = {x * 2 for x in range(1000)}",
+            "gen = <x * 2 for x in nums>",
             StateEnum.WRONG,
-            "Curly braces create a Set comprehension, which is fully evaluated.",
+            "Invalid syntax. Angle brackets don't work for generators in Python.",
           ),
           new CodeLine(
-            "gen = yield (x * 2 for x in range(1000))",
+            "gen = (x for x in nums) * 2",
             StateEnum.WRONG,
-            "This syntax is not for creating generator expressions.",
+            "Syntax error. This multiplies the generator object itself, not the values.",
           ),
         ],
         "python",

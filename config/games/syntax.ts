@@ -31,7 +31,7 @@ export const syntaxGames: Game[] = [
           new CodeLine(
             "  b: int = 12",
             StateEnum.CORRECT,
-            "Proper use of type hint with a list of integers.",
+            "Correct! Type annotation matches the assigned integer value.",
             20,
           ),
           new CodeLine(
@@ -65,7 +65,7 @@ export const syntaxGames: Game[] = [
     .setHref("shopping-cart-calculation-1")
     .setTags([kt.function, kt.syntax])
     .setSynopsis(
-      "Understand complex variable assignment and function logic in a shopping cart calculation.",
+      "Identify the correct return statement in a shopping cart function.",
     )
     .setLevel(2)
     .setDisabled(false)
@@ -75,76 +75,54 @@ export const syntaxGames: Game[] = [
         [
           new CodeLine("from typing import List, Tuple", StateEnum.NORMAL, ""),
           new CodeLine(
-            "def calculate_total(items: List[Tuple[str, float, int]], tax_rate: float, discount: float) -> float:",
+            "def calculate_total(items: List[Tuple[str, float, int]], tax_rate: float) -> float:",
             StateEnum.NORMAL,
             "",
           ),
-          new CodeLine(
-            "    total: float = 0.0",
-            StateEnum.NORMAL,
-            "Initializes the total cost.",
-          ),
+          new CodeLine("    total: float = 0.0", StateEnum.NORMAL, ""),
           new CodeLine(
             "    for item_name, price, quantity in items:",
             StateEnum.NORMAL,
             "",
           ),
           new CodeLine(
-            "        item_total = price * quantity",
+            "        total += price * quantity",
             StateEnum.NORMAL,
             "",
           ),
-          new CodeLine("        total += item_total", StateEnum.NORMAL, ""),
-          new CodeLine("    if discount > 0:", StateEnum.NORMAL, ""),
           new CodeLine(
-            "        total -= total * (discount / 100)",
+            "    # Now we need to return the total",
             StateEnum.NORMAL,
             "",
           ),
           new CodeLine(
             "    return",
             StateEnum.ERROR,
-            "We are not returning anything here.",
-          ),
-          new CodeLine(
-            "    return(total)",
-            StateEnum.WRONG,
-            "You should not call return",
+            "Incomplete return statement. You must return a value, not just the keyword.",
           ),
           new CodeLine(
             "    return total",
             StateEnum.CORRECT,
-            "Returning the total",
+            "Correct! This returns the calculated total to the caller.",
             10,
+          ),
+          new CodeLine(
+            "    return(total)",
+            StateEnum.WRONG,
+            "While this works technically, it's unnecessary to use parentheses with return.",
           ),
           new CodeLine(
             "    Return(total)",
             StateEnum.WRONG,
-            "Returning is not a python statement.",
-          ),
-          new CodeLine(
-            "    Return total",
-            StateEnum.WRONG,
-            "Returning is not a python statement.",
-          ),
-          new CodeLine(
-            "cart_items = [('Book', 15.99, 2), ('Pen', 1.50, 5)]",
-            StateEnum.NORMAL,
-            "",
-          ),
-          new CodeLine(
-            "print(calculate_total(cart_items, 5, 10))",
-            StateEnum.NORMAL,
-            "",
+            "Python keywords are case-sensitive. 'return' must be lowercase.",
           ),
         ],
         "python",
       ),
     )
     .setText(
-      `This code snippet involves a function to calculate the total cost of items in a shopping cart, including tax and discounts.
-        Analyze the function for logic errors and correct type annotations in a real-world e-commerce scenario.
-        Identify the lines with logical and syntactical errors in the context of a typical shopping cart calculation.`,
+      "A function must return its computed value. Identify the correct return statement in this shopping cart calculator.",
     )
+    .setCategory("Syntax")
     .build(),
 ];

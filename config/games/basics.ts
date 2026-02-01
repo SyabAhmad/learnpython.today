@@ -208,13 +208,13 @@ export const basicGames: Game[] = [
         [
           new CodeLine(
             "def loop_though(x):",
-            StateEnum.ERROR,
-            "Remember to include parentheses in 'range()'.",
+            StateEnum.NORMAL,
+            "Function definition with parameter",
           ),
           new CodeLine(
             "  for i in range[x]: print(i)",
             StateEnum.ERROR,
-            "Remember to include parentheses in 'range()'.",
+            "Remember to include parentheses in 'range()' - use range(x) not range[x].",
           ),
           new CodeLine(
             "  for i in range(x): print(i)",
@@ -257,7 +257,11 @@ export const basicGames: Game[] = [
         [
           new CodeLine("my_list = []", StateEnum.NORMAL, ""),
           new CodeLine("for i in range(5):", StateEnum.NORMAL, ""),
-          new CodeLine("  my_list(append(i))", StateEnum.ERROR, ""),
+          new CodeLine(
+            "  my_list(append(i))",
+            StateEnum.ERROR,
+            "Incorrect syntax. Lists don't use parentheses for method calls - should be my_list.append(i) with dot notation.",
+          ),
           new CodeLine(
             "  my_list_append(i)",
             StateEnum.WRONG,

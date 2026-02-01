@@ -211,25 +211,37 @@ export const algorithmGames: Game[] = [
     .setCodeBlock(
       new CodeBlock(
         [
-          new CodeLine("# Assessing time complexity of a[i]"),
+          new CodeLine("# What is the time complexity of accessing a[5]?"),
+          new CodeLine("my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"),
+          new CodeLine("value = my_list[5]  # Direct index access"),
+          new CodeLine(""),
           new CodeLine(
             "O(n)",
             StateEnum.WRONG,
-            "This is the complexity of searching for a value, not accessing by index.",
+            "Incorrect. O(n) complexity would apply if you had to search for a value.",
           ),
           new CodeLine(
             "O(1)",
             StateEnum.CORRECT,
-            "Correct! Accessing a list element by index is a constant time operation.",
+            "Correct! Accessing a list element by index is a constant time operation, regardless of list size.",
             10,
           ),
-          new CodeLine("O(log n)", StateEnum.ERROR),
+          new CodeLine(
+            "O(log n)",
+            StateEnum.WRONG,
+            "Incorrect. O(log n) complexity applies to binary search, not direct index access.",
+          ),
+          new CodeLine(
+            "O(n log n)",
+            StateEnum.WRONG,
+            "Incorrect. O(n log n) is typically used for efficient sorting algorithms.",
+          ),
         ],
         "python",
       ),
     )
     .setText(
-      "What is the big-O time complexity of accessing an element in a Python list by its index?",
+      "What is the big-O time complexity of accessing an element in a Python list by its index? This is a fundamental property of how lists are stored in memory.",
     )
     .setCategory("Algorithms")
     .build(),
