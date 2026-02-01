@@ -86,4 +86,8 @@ export const knownTags: { [key: string]: Tag } = {
     text: "Metaclasses",
     href: "/tags/metaclasses",
   },
+  flask: {
+    text: "Flask",
+    href: "/tags/flask",
+  },
 };

@@ -6,7 +6,6 @@ import { knownTags as kt } from "@/config/tag";
 
 // Python Games - New Language-Based Structure
 import { basicGames as pythonBasicsGames } from "./games/languages/python/basics";
-import { pythonFlaskGames } from "./games/languages/python/flask";
 import { pythonNumpyGames } from "./games/languages/python/numpy";
 import { stringGames as pythonStringGames } from "./games/languages/python/strings";
 import { listGames as pythonListGames } from "./games/languages/python/list";
@@ -42,6 +41,9 @@ import { jsBasicsGames } from "./games/languages/javascript/basics";
 
 // Go Games
 import { goBasicsGames } from "./games/languages/go/basics";
+
+// Flask Games
+import { flaskGames } from "./games/languages/flask/basics";
 
 // Create Introduction game
 const introductionGame: Game = new GameBuilder()
@@ -174,9 +176,9 @@ const allLanguageGames: Game[] = [
     language: Language.PYTHON,
     category: "Testing",
   })),
-  ...pythonFlaskGames.map((g: Game) => ({
+  ...flaskGames.map((g: Game) => ({
     ...g,
-    language: Language.PYTHON,
+    language: Language.FLASK,
     category: "Backend - Flask",
   })),
   ...pythonNumpyGames.map((g: Game) => ({

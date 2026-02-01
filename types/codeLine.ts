@@ -14,6 +14,7 @@ export enum Language {
   CSS = "css",
   JAVASCRIPT = "javascript",
   GO = "go",
+  FLASK = "flask",
 }
 
 // Supported backend/execution services

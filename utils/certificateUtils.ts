@@ -64,6 +64,7 @@ export const getLanguageDisplayName = (language: Language): string => {
     [Language.CSS]: "CSS",
     [Language.JAVASCRIPT]: "JavaScript",
     [Language.GO]: "Go",
+    [Language.FLASK]: "Flask",
   };
   return names[language] || "Unknown";
 };
@@ -95,6 +96,10 @@ export const getLanguageCertificateColor = (
     [Language.GO]: {
       primary: "from-cyan-500 to-cyan-600",
       secondary: "bg-cyan-500/10 border-cyan-500/20",
+    },
+    [Language.FLASK]: {
+      primary: "from-green-500 to-green-600",
+      secondary: "bg-green-500/10 border-green-500/20",
     },
   };
   return colors[language] || colors[Language.PYTHON];
