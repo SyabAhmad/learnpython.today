@@ -21,8 +21,14 @@ import {
   Award,
   CheckCircle2,
   RefreshCw,
+  Target,
+  ChevronDown,
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { CertificateAutoAward } from "@/components/certificate-auto-award";
+import { CertificateCard } from "@/components/certificate-card";
+import { CertificateProgressCard } from "@/components/certificate-progress-card";
+import { getAllLanguageCertificateProgress } from "@/utils/certificateUtils";
 
 export default function ProfilePage() {
   const {
@@ -31,12 +37,14 @@ export default function ProfilePage() {
     totalScore,
     completedGames,
     gameResults,
+    certificates,
     setUserInfo,
     resetProgress,
   } = useProgressStore();
   const [name, setName] = useState(userName);
   const [email, setEmail] = useState(userEmail);
   const [mounted, setMounted] = useState(false);
+  const [showCompletedGames, setShowCompletedGames] = useState(false);
   const { toast } = useToast();
   const badgeRef = useRef<SVGSVGElement>(null);
 
@@ -100,9 +108,12 @@ export default function ProfilePage() {
   const completedGamesList = games.filter((g) =>
     completedGames.includes(g.href),
   );
+  const certificateProgress = getAllLanguageCertificateProgress(completedGames);
 
   return (
     <div className="container max-w-4xl py-10 space-y-8">
+      {/* Certificate Auto-Award Monitor */}
+      <CertificateAutoAward />
       <div className="flex items-center gap-4">
         <div className="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg shadow-emerald-500/20">
           <User className="h-8 w-8" />
@@ -199,65 +210,126 @@ export default function ProfilePage() {
           </Card>
 
           <Card className="border-border bg-card shadow-sm">
+            <CardHeader
+              className="flex flex-row items-center justify-between cursor-pointer hover:bg-accent/50 transition-colors rounded-t-lg"
+              onClick={() => setShowCompletedGames(!showCompletedGames)}
+            >
+              <div className="flex flex-col space-y-1.5 flex-1">
+                <CardTitle className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                  Completed Games
+                </CardTitle>
+                <CardDescription>
+                  The challenges you have mastered.
+                </CardDescription>
+              </div>
+              <ChevronDown
+                className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${showCompletedGames ? "rotate-180" : ""}`}
+              />
+            </CardHeader>
+            {showCompletedGames && (
+              <CardContent>
+                <div className="space-y-2">
+                  {completedGamesList.length > 0 ? (
+                    completedGamesList.map((game) => {
+                      const result = gameResults?.find(
+                        (r) => r.href === game.href,
+                      );
+                      return (
+                        <div
+                          key={game.href}
+                          className="flex items-center justify-between p-3 bg-accent/10 rounded-lg border border-border group hover:border-emerald-500/30 transition-all"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="p-1.5 bg-emerald-500/20 rounded text-emerald-500">
+                              <CheckCircle2 className="h-4 w-4" />
+                            </div>
+                            <div>
+                              <span className="font-medium block text-foreground">
+                                {game.title}
+                              </span>
+                              {result && (
+                                <div className="text-xs text-muted-foreground flex gap-2 mt-0.5">
+                                  <span>
+                                    Score:{" "}
+                                    <span className="text-emerald-500">
+                                      {result.score}
+                                    </span>
+                                  </span>
+                                  <span>•</span>
+                                  <span>
+                                    Penalty:{" "}
+                                    <span className="text-red-500">
+                                      -{result.penalty || 0}
+                                    </span>
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <span className="text-xs text-emerald-500 font-bold bg-emerald-500/10 px-2 py-1 rounded">
+                            COMPLETED
+                          </span>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
+                      No games completed yet. Start learning!
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            )}
+          </Card>
+
+          {/* Earned Certificates Section */}
+          {certificates.length > 0 && (
+            <Card className="border-border bg-card shadow-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Award className="h-5 w-5 text-emerald-500" />
+                  Your Certificates
+                </CardTitle>
+                <CardDescription>
+                  Certificates earned for completing all games in each language.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4">
+                  {certificates.map((cert) => (
+                    <CertificateCard
+                      key={cert.id}
+                      certificate={cert}
+                      userName={name}
+                      userEmail={email}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Certificate Progress Section */}
+          <Card className="border-border bg-card shadow-sm">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                Completed Games
+                <Target className="h-5 w-5 text-blue-500" />
+                Certificate Progress
               </CardTitle>
               <CardDescription>
-                The challenges you have mastered.
+                Track your progress toward earning certificates for each
+                language.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
-                {completedGamesList.length > 0 ? (
-                  completedGamesList.map((game) => {
-                    const result = gameResults?.find(
-                      (r) => r.href === game.href,
-                    );
-                    return (
-                      <div
-                        key={game.href}
-                        className="flex items-center justify-between p-3 bg-accent/10 rounded-lg border border-border group hover:border-emerald-500/30 transition-all"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="p-1.5 bg-emerald-500/20 rounded text-emerald-500">
-                            <CheckCircle2 className="h-4 w-4" />
-                          </div>
-                          <div>
-                            <span className="font-medium block text-foreground">
-                              {game.title}
-                            </span>
-                            {result && (
-                              <div className="text-xs text-muted-foreground flex gap-2 mt-0.5">
-                                <span>
-                                  Score:{" "}
-                                  <span className="text-emerald-500">
-                                    {result.score}
-                                  </span>
-                                </span>
-                                <span>•</span>
-                                <span>
-                                  Penalty:{" "}
-                                  <span className="text-red-500">
-                                    -{result.penalty || 0}
-                                  </span>
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                        <span className="text-xs text-emerald-500 font-bold bg-emerald-500/10 px-2 py-1 rounded">
-                          COMPLETED
-                        </span>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-8 text-muted-foreground border border-dashed border-border rounded-lg">
-                    No games completed yet. Start learning!
-                  </div>
-                )}
+              <div className="grid md:grid-cols-2 gap-4">
+                {certificateProgress.map((progress) => (
+                  <CertificateProgressCard
+                    key={progress.language}
+                    progress={progress}
+                  />
+                ))}
               </div>
             </CardContent>
           </Card>

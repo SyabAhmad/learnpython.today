@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { UnifiedContent, isGame, isArticle } from "@/types/unifiedContent";
 import { Language } from "@/types/codeLine";
+import { Certificate } from "@/types/certificate";
 
 export interface GameResult {
   href: string;
@@ -23,6 +24,7 @@ interface ProgressState {
   gameResults: GameResult[];
   completedArticles: string[];
   languageProgress: Record<string, LanguageProgress>;
+  certificates: Certificate[];
   currentContent: string | null;
   totalScore: number;
   userName: string;
@@ -40,6 +42,9 @@ interface ProgressState {
   getNextContent: (allContent: UnifiedContent[]) => UnifiedContent | null;
   getCompletedCounts: () => { games: number; articles: number };
   getLanguageProgress: (language: Language | string) => LanguageProgress | null;
+  hasCertificate: (language: Language | string) => boolean;
+  getCertificates: () => Certificate[];
+  addCertificate: (certificate: Certificate) => void;
   resetProgress: () => void;
   resetLanguageProgress: (language: Language | string) => void;
 }
@@ -51,6 +56,7 @@ export const useProgressStore = create<ProgressState>()(
       gameResults: [],
       completedArticles: [],
       languageProgress: {},
+      certificates: [],
       currentContent: null,
       totalScore: 0,
       userName: "Python Learner",
@@ -132,12 +138,34 @@ export const useProgressStore = create<ProgressState>()(
         const langKey = language.toString();
         return state.languageProgress[langKey] || null;
       },
+      hasCertificate: (language) => {
+        const state = get();
+        const langKey = language.toString();
+        return state.certificates.some(
+          (cert) => cert.language.toString() === langKey,
+        );
+      },
+      getCertificates: () => {
+        const state = get();
+        return state.certificates;
+      },
+      addCertificate: (certificate) =>
+        set((state) => {
+          const exists = state.certificates.some(
+            (cert) => cert.language === certificate.language,
+          );
+          if (exists) return state;
+          return {
+            certificates: [...state.certificates, certificate],
+          };
+        }),
       resetProgress: () =>
         set({
           completedGames: [],
           gameResults: [],
           completedArticles: [],
           languageProgress: {},
+          certificates: [],
           totalScore: 0,
         }),
       resetLanguageProgress: (language) =>
