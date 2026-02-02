@@ -32,6 +32,16 @@ import { sqlBasicsGames } from "./games/languages/sql/basics";
 
 // HTML Games
 import { htmlBasicsGames } from "./games/languages/html/basics";
+import { htmlHeadingGames } from "./games/languages/html/heading-tags";
+import { htmlFormGames } from "./games/languages/html/form-input-type";
+import { htmlSemanticGames } from "./games/languages/html/semantic-tags";
+import { htmlAttributesGames } from "./games/languages/html/image-attribute";
+import { htmlLinkGames } from "./games/languages/html/link-target";
+import { htmlListGames } from "./games/languages/html/list-structure";
+import { htmlTableGames } from "./games/languages/html/table-structure";
+import { htmlMetaGames } from "./games/languages/html/meta-charset";
+import { htmlButtonGames } from "./games/languages/html/button-type";
+import { htmlVideoGames } from "./games/languages/html/video-controls";
 
 // CSS Games
 import { cssBasicsGames } from "./games/languages/css/basics";
@@ -196,6 +206,66 @@ const allLanguageGames: Game[] = [
 
   // HTML Games
   ...htmlBasicsGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlHeadingGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlFormGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlSemanticGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlAttributesGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlLinkGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlListGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlTableGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlMetaGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlButtonGames.map((g: Game) => ({
+    ...g,
+    language: Language.HTML,
+    category: "HTML Basics",
+  })),
+
+  ...htmlVideoGames.map((g: Game) => ({
     ...g,
     language: Language.HTML,
     category: "HTML Basics",
