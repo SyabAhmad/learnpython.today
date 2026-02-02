@@ -90,4 +90,8 @@ export const knownTags: { [key: string]: Tag } = {
     text: "Flask",
     href: "/tags/flask",
   },
+  html: {
+    text: "HTML",
+    href: "/tags/html",
+  },
 };
